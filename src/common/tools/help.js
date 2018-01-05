@@ -54,5 +54,12 @@ export default {
       x: parseFloat(res[1]),
       y: parseFloat(res[2])
     }
+  },
+  isDOM(ele) {
+    if (typeof ele === 'object') {
+      return ele instanceof HTMLElement
+    } else {
+      return ele && typeof ele === 'object' && ele.nodeType === 1 && typeof ele.nodeName === 'string'
+    }
   }
 }
