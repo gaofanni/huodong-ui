@@ -1,6 +1,9 @@
 <template>
     <div class="wrap">
-        <div class='title'>雷达图</div>
+        <div class="info">
+            <div class='title'>雷达图</div>
+            <div class="author">gaofanni</div>
+        </div>
         <div class="canvas-wrap">
             <canvasCpl :opt="{
                 count: 5,//边数
@@ -45,9 +48,6 @@
 <script>
     import canvasCpl from "../../packages/radar/index";
     export default {
-      mounted() {
-        hljs.initHighlightingOnLoad();
-      },
       components: { canvasCpl }
     };
 </script>

@@ -8,6 +8,7 @@ Vue.use(Router);
 const router = new Router({
     routes: [
         { path: "/", component: Radar, name: 'radar' },
+        { path: "/radar", component: Radar, name: 'radar' },
         { path: '/lotto', component: Lotto, name: 'lotto' }
         // {
         //     path: "/Home",

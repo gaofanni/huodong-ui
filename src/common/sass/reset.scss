@@ -53,8 +53,6 @@ h6 {
 
 html,
 body {
-    -webkit-user-select: none;
-    user-select: none;
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
 }
@@ -160,7 +158,7 @@ input:focus::-webkit-input-placeholder {
 
 ::-webkit-scrollbar {
     display: none;
-}
+}  
 
 img {
     -webkit-touch-callout: none;

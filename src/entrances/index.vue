@@ -8,7 +8,10 @@
       </aside>
       <section class='container'>
         <div class="inner">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+
+          </keep-alive>
         </div>
       </section>
     </section>

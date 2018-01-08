@@ -1,25 +1,115 @@
 <template>
-    <Lotto :get="lottoResult"
-        :rewardList="rewardList"
-        :isGameBegin='gameBegin'
-        :num='scrollNum'
-        @checkGamePermission="checkGamePermission"
-        @lottoOver="lottoOver">
-        <div class="box"
-            :slot='`box${index+1}`'
-            v-for="(ele,index) in scrollNum">
-            <div class="content">
-                <ul>
-                    <li ref="scrollEl1"
-                        class="goods"
-                        v-for="(item,index) in rewardList"
-                        :class="`gift-${item.key}-s`"></li>
-                </ul>
-            </div>
+    <div class="wrap">
+        <div class="info">
+            <div class='title'>抽奖大乐透</div>
+            <div class="author">gaofanni</div>
         </div>
-        <div slot='btn-begin'
-            class='btn btn-begin'></div>
-    </Lotto>
+        <Lotto :get="lottoResult"
+            :rewardList="rewardList"
+            :num='scrollNum'
+            :isGameBegin='gameBegin'
+            @checkGamePermission="checkGamePermission"
+            @lottoOver="lottoOver">
+            <div class="box"
+                :slot='`box${index+1}`'
+                v-for="(ele,index) in scrollNum">
+                <div class="content">
+                    <ul>
+                        <li ref="scrollEl1"
+                            class="goods"
+                            v-for="(item,index) in rewardList"
+                            :class="`gift-${item.key}-s`"></li>
+                    </ul>
+                </div>
+            </div>
+            <div slot='btn-begin'
+                class='btn btn-begin'></div>
+        </Lotto>
+        <div class="btn-showCode"
+            @click="isShowCode=!isShowCode">显示代码</div>
+        <div class="code"
+            v-show="isShowCode">
+            <pre>
+                <code>
+        &ltLotto :get="lottoResult:Object"   
+            :rewardList="rewardList:Array" 
+            :isGameBegin='gameBegin'
+            :num='scrollNum'
+            @checkGamePermission="checkGamePermission"
+            @lottoOver="lottoOver"&gt
+            &ltdiv class="box"
+                :slot='`box${index+1}`'
+                v-for="(ele,index) in scrollNum"&gt
+                &ltdiv class="content"&gt
+                    &ltul&gt
+                        &ltli ref="scrollEl1"
+                            class="goods"
+                            v-for="(item,index) in rewardList"
+                            :class="`gift-${item.key}-s`"&gt&lt/li&gt
+                    &lt/ul&gt
+                &lt/div&gt
+            &lt/div&gt
+            &ltdiv slot='btn-begin'
+                class='btn btn-begin'&gt&lt/div&gt
+        &lt/Lotto&gt
+                </code>
+            </pre>
+        </div>
+        <table class="attributes">
+            <caption class="title">Attributes</caption>
+            <thead class="">
+                <th>参数</th>
+                <th>说明</th>
+                <th>类型</th>
+                <th>默认值</th>
+                <th>可选值</th>
+            </thead>
+            <tbody class>
+                <tr>
+                    <td>lottoResult</td>
+                    <td>中奖信息，中奖:{index:中奖的索引},没中奖:{}</td>
+                    <td>Object</td>
+                    <td>{}</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>rewardList</td>
+                    <td>轮播图，用于取得一共多少中奖项</td>
+                    <td>Array</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>isGameBegin</td>
+                    <td>是否可以开始抽奖，用于点击开始按钮的确认</td>
+                    <td>Boolean</td>
+                    <td>-</td>
+                    <td>true/false</td>
+                </tr>
+                <tr>
+                    <td>num</td>
+                    <td>抽奖单元个数</td>
+                    <td>Number</td>
+                    <td>3</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class='events'>
+            <caption class="title">Events</caption>
+            <thead>
+                <th>事件名</th>
+                <th>说明</th>
+                <th>参数</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>checkGamePermission</td>
+                    <td>点击'点我转一转'按钮触发的事件</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>
@@ -27,51 +117,36 @@
     export default {
       data() {
         return {
+          isShowCode: false,
           lottoResult: {},
           rewardList: [
             {
-              type: "死忠粉",
-              key: "sizhongfen",
-              index: 1
+              key: "sizhongfen"
             },
             {
-              type: "小蛋糕",
-              key: "cake",
-              index: 2
+              key: "cake"
             },
             {
-              type: "生日快乐",
-              key: "shengrikuaile",
-              index: 3
+              key: "shengrikuaile"
             },
             {
-              type: "老司机",
-              key: "laosiji",
-              index: 4
+              key: "laosiji"
             },
             {
-              type: "手机支架",
-              key: "shoujizhijia",
-              index: 5
+              key: "shoujizhijia"
             },
             {
-              type: "玩偶",
-              key: "baozhen",
-              index: 6
+              key: "baozhen"
             },
             {
-              type: "棒棒糖",
-              key: "bangbangtang",
-              index: 7
+              key: "bangbangtang"
             },
             {
-              type: "狗粮",
-              key: "gouliang",
-              index: 8
+              key: "gouliang"
             }
           ],
           gameBegin: false,
-          scrollNum: 9
+          scrollNum: 3
         };
       },
       methods: {

@@ -15,12 +15,22 @@
 
   export default {
     name: "lotto",
-    props: [
-      "get", //获取到的奖励对象，**必须要有一个index对应索引，确定要显示第几个高度**
-      "rewardList", //渲染显示的奖品对象
-      "isGameBegin", //是否开始抽奖
-      "num"
-    ],
+    props: {
+      get: {
+        default: () => {
+          return {};
+        }
+      }, //获取到的奖励对象，**必须要有一个index对应索引，确定要显示第几个高度**
+      rewardList: {
+        require: true
+      }, //渲染显示的奖品对象
+      isGameBegin: {
+        require: true
+      }, //是否开始抽奖
+      num: {
+        default: 3
+      }
+    },
     data() {
       return {
         stop: 0,
@@ -105,7 +115,6 @@
         let moveFn = () => {
           //回到顶部
           if (this.count["move_" + n] === this.originLen) {
-            // alert(round);
             movingEl.style.webkitTransition = "none";
             movingEl.style.webkitTransform = `translateY(0)`;
             this.count["move_" + n] = 0;
@@ -142,7 +151,7 @@
               if (!this.isMove) {
                 this.initMoveAll();
               }
-            }, time + 3800);
+            }, time + 3000);
             return;
           }
           //正常情况下的移动

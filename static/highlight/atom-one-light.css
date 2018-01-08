@@ -24,7 +24,8 @@ hue-6-2: #c18401
   padding: 0.5em;
   color: #383a42;
   background: #fafafa;
-  font-weight: 500;
+  font-family: "microsoft yahei", "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+  line-height: 1.5;
 }
 
 .hljs-comment,

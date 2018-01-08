@@ -65,18 +65,75 @@ width: 100%;
 .wrap {
 width: re(600);
 box-shadow: 0 0 re(10) rgba(100, 100, 100, 0.2);
-padding: re(20);
 margin: 0 auto;
+background:white;
+padding: re(20) 0;
+font-size: re(16);
+}
+.btn-showCode{
+    width:100%;
+    height:re(40);
+    font-size: re(16);
+    line-height: re(40);
+    cursor: pointer;
+    background:#f5f5f5;;
+    color:#646464;
+    margin-top: re(20);
 }
 //代码块样式
 .code {
-display: inline-block;
-font-size: re(16);
-text-align: left;
-width: re(560);
+    display: inline-block;
+    font-size: re(14);
+    text-align: left;
+    width: re(560);
+}
+
+code{
+    &::-webkit-scrollbar {
+        width:re(16);
+        height:re(8);
+        display: block;
+    } 
+    &::-webkit-scrollbar-thumb  
+    {  
+        border-radius: re(4);  
+        background-color: #999; 
+    } 
 }
 //标题样式
-.title {
-font-size: re(24);
-text-align: left;
+.info{
+    margin-bottom: re(40);
+    text-align: left;
+    font-size: 0;
+    margin-left:re(20);
+    .title {
+        font-size: re(24);
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .author{
+        font-size: re(16);
+    }
+}
+//表格样式
+table{
+    .title{
+        text-align: left;
+        font-size: re(20);
+        height:re(40);
+        line-height: re(40);
+        padding-left: re(10);
+        color:#3182bd;
+    }
+    display: inline-block;
+    margin-top: re(20);
+    font-size: re(14);
+    td,th{
+        padding-left:re(10);
+        color:#333;
+        border-bottom:1px solid #d8d8d8;
+        padding: re(8);
+        max-width: re(250);
+        text-align: left;
+    }
 }
