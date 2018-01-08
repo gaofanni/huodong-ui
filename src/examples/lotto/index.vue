@@ -17,6 +17,8 @@
                 </ul>
             </div>
         </div>
+        <div slot='btn-begin'
+            class='btn btn-begin'></div>
     </Lotto>
 </template>
 
@@ -25,12 +27,7 @@
     export default {
       data() {
         return {
-          lottoResult: {
-            channel: "8",
-            message: "手机支架",
-            key: "shoujizhijia",
-            index: 1
-          },
+          lottoResult: {},
           rewardList: [
             {
               type: "死忠粉",
@@ -74,7 +71,7 @@
             }
           ],
           gameBegin: false,
-          scrollNum: 1
+          scrollNum: 9
         };
       },
       methods: {
@@ -85,7 +82,15 @@
           }, 100);
         },
         lottoOver() {
-          alert("中奖啦");
+          if (this.lottoResult.index) {
+            alert("中奖啦");
+            this.lottoResult = {}; //模拟没中奖
+          } else {
+            alert("没中奖");
+            this.lottoResult = {
+              index: 1
+            };
+          }
         }
       },
       components: { Lotto }
@@ -138,19 +143,13 @@
         }
       }
     }
-    .lotto-Cpl {
+    .btn-begin {
+      @include bg("btn_lotto_nor.png");
+      @include whr(455, 104);
+      display: inline-block;
       margin-top: re(22);
-      .lotto-box {
-        font-size: 0;
-      }
-      .btn-begin {
-        @include bg("btn_lotto_nor.png");
-        @include whr(455, 104);
-        display: inline-block;
-        margin-top: re(22);
-        &.act {
-          @include bg("btn_lotto_act.png");
-        }
+      &.act {
+        @include bg("btn_lotto_act.png");
       }
     }
 </style>
