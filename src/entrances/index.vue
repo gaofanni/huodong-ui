@@ -1,6 +1,8 @@
 <template>
   <div class="root">
-    <header>huodong</header>
+    <header>
+      <span class="nav"></span> huodong
+    </header>
     <section class="main">
       <aside style="display:block">
         <router-link :to="{name:'radar'}">radar 雷达图</router-link>

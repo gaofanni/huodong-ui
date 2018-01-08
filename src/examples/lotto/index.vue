@@ -26,9 +26,12 @@
                 class='btn btn-begin'></div>
         </Lotto>
         <div class="btn-showCode"
-            @click="isShowCode=!isShowCode">显示代码</div>
+            @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
         <div class="code"
             v-show="isShowCode">
+            <div class="tips">
+                通过v-for插槽增加抽奖的单元个数，注意<span class='hl'>:slot='`box${index+1}`'</span>需对应index传入，预览效果为一次中奖一次没中奖
+            </div>
             <pre>
                 <code>
         &ltLotto :get="lottoResult:Object"   
@@ -49,9 +52,63 @@
                     &lt/ul&gt
                 &lt/div&gt
             &lt/div&gt
-            &ltdiv slot='btn-begin'
-                class='btn btn-begin'&gt&lt/div&gt
+            &ltdiv slot='btn-begin' class='btn btn-begin'&gt&lt/div&gt
         &lt/Lotto&gt
+
+        &ltscript&gt
+            export default {
+                data() {
+                return {
+                    isShowCode: false,
+                    lottoResult: {},
+                    rewardList: [
+                    {
+                        key: "sizhongfen"
+                    },
+                    {
+                        key: "cake"
+                    },
+                    {
+                        key: "shengrikuaile"
+                    },
+                    {
+                        key: "laosiji"
+                    },
+                    {
+                        key: "shoujizhijia"
+                    },
+                    {
+                        key: "baozhen"
+                    },
+                    {
+                        key: "bangbangtang"
+                    },
+                    {
+                        key: "gouliang"
+                    }
+                    ],
+                    gameBegin: false,
+                    scrollNum: 3
+                };
+                },
+                methods: {
+                    checkGamePermission() {
+                        this.gameBegin = true;
+                    },
+                    lottoOver() {
+                        if (this.lottoResult.index) {
+                            alert("中奖啦");
+                            this.lottoResult = {}; //模拟没中奖
+                        } else {
+                            alert("没中奖");
+                            this.lottoResult = {index: 1};//模拟中奖
+                        }
+                        this.gameBegin = false;
+                    }
+                },
+                components: { Lotto }
+            }
+        &lt/script&gt
                 </code>
             </pre>
         </div>
@@ -106,6 +163,12 @@
                 <tr>
                     <td>checkGamePermission</td>
                     <td>点击'点我转一转'按钮触发的事件</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>lottoOver</td>
+                    <td>抽奖动画结束时触发的事件</td>
+                    <td>--</td>
                 </tr>
             </tbody>
         </table>
@@ -152,9 +215,6 @@
       methods: {
         checkGamePermission() {
           this.gameBegin = true;
-          window.setTimeout(() => {
-            this.gameBegin = false;
-          }, 100);
         },
         lottoOver() {
           if (this.lottoResult.index) {
@@ -166,6 +226,7 @@
               index: 1
             };
           }
+          this.gameBegin = false;
         }
       },
       components: { Lotto }
