@@ -9,7 +9,8 @@ const router = new Router({
         { path: "/", component: Radar, name: 'radar' },
         { path: "/radar", component: Radar, name: 'radar' },
         { path: '/lotto', component: () => import('../examples/lotto/index'), name: 'lotto' },
-        { path: '/scrollNotice', component: () => import('../examples/scrollNotice/index'), name: 'scrollNotice' }
+        { path: '/scrollNotice', component: () => import('../examples/scrollNotice/index'), name: 'scrollNotice' },
+        { path: '/step', component: () => import('../examples/step/index'), name: 'step' }
     ]
 });
 
