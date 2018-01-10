@@ -10,7 +10,7 @@
         <router-link :to="{name:'radar'}">radar 雷达图</router-link>
         <router-link :to="{name:'lotto'}">lotto 抽奖乐透</router-link>
         <router-link :to="{name:'scrollNotice'}">scrollNotice 跑马灯</router-link>
-        <router-link :to="{name:'step'}">step 进度条/步骤条</router-link>
+        <router-link :to="{name:'barrage'}">barrage 弹幕</router-link>
       </aside>
       <section class='container'>
         <div class="inner">

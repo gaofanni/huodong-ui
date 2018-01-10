@@ -9,26 +9,39 @@
     export default {
       name: "barrage",
       props: {
-        data: { require: true },
-        stopBarrage: { require: true }
+        data: { require: true }, //弹幕数据
+        isStopBarrage: { require: true, default: false }, //弹幕是否运行
+        MAX: {
+          //最多走多少条弹幕
+          default: 3
+        },
+        intervalTime: {
+          //间隔时间
+          default: 50
+        },
+        speed: {
+          //每条弹幕运动速度
+          default: 200
+        }
+      },
+      watch: {
+        isStopBarrage(val) {
+          if (val) {
+            for (let i = 0; i < window.timerAry.length; i++) {
+              clearInterval(window.timerAry[i]);
+              this.running = false;
+            }
+          } else {
+            this.startBarrage();
+          }
+        }
       },
       mounted() {
-        // bus.$on("stopBarrage", () => {
-        //   for (let i = 0; i < window.timerAry.length; i++) {
-        //     clearInterval(window.timerAry[i]);
-        //     this.running = false;
-        //   }
-        // });
-        window.android && android.bindEvent("resume", "pageCallBack");
-        window.pageCallBack = () => {
-          this.startBarrage();
-        };
         this.setPosAry();
         this.$nextTick(this.startBarrage);
       },
       data() {
         return {
-          MAX: 3,
           timeTotal: 0,
           running: false,
           posAry: []
@@ -71,7 +84,7 @@
           }
         },
         getRandomTime(txt) {
-          return Math.round(Math.random() * 600 + txt.length * 100);
+          return Math.round(Math.random() * 600 + txt.length * this.intervalTime);
         },
         getCss(ele, t) {
           return parseInt(window.getComputedStyle(ele)[t]);
@@ -129,7 +142,7 @@
               parent.appendChild(LI);
 
               let LEN = this.getCss(LI, "width");
-              let time = (LEN + paWidth + 2) / 200;
+              let time = (LEN + paWidth + 2) / this.speed;
               LI.style.webkitTransition = `-webkit-transform ${time}s linear`;
               LI.style.webkitTransform = `translateX(-${LEN +
                 paWidth}px) translateZ(0)`;
