@@ -15,7 +15,7 @@
       @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
     <div class="code"
       v-show="isShowCode">
-      <div class="tips">在组件内定制样式，需要插入一条li写入默认样式，且每一条的纵向高度需定制，className需以<span class='hl'>txt-</span>开头，如第一行的为txt-0</div>
+      <div class="tips">在组件内定制样式，需要插入一条li写入默认样式，且每一条的纵向高度需定制，<span class='hl'>className需以txt-开头</span>，如第一行的为txt-0，依次类推</div>
       <pre v-pre>
         <code>
               &ltBarrage  :data='barrageData' 
@@ -168,7 +168,7 @@
   };
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
   @import "../../common/sass/global";
   .barrage-content {
     position: relative;
@@ -177,26 +177,26 @@
     height: re(176);
     overflow: hidden;
     border: 1px solid #999;
-  }
-  li {
-    display: inline-block;
-    position: absolute;
-    left: re(520);
-    padding: 0 re(40);
-    height: re(47);
-    border: 1px solid #bf8555;
-    line-height: re(47);
-    white-space: nowrap;
-    background-color: #2d1711;
-    color: #bf8555;
-    &.txt-0 {
-      top: 0;
-    }
-    &.txt-1 {
-      top: re(66);
-    }
-    &.txt-2 {
-      top: re(129);
+    li {
+      display: inline-block;
+      position: absolute;
+      left: re(520);
+      padding: 0 re(40);
+      height: re(47);
+      border: 1px solid #bf8555;
+      line-height: re(47);
+      white-space: nowrap;
+      background-color: #2d1711;
+      color: #bf8555;
+      &.txt-0 {
+        top: 0;
+      }
+      &.txt-1 {
+        top: re(66);
+      }
+      &.txt-2 {
+        top: re(129);
+      }
     }
   }
   .stop {

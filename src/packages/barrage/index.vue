@@ -132,9 +132,10 @@
             //获得下一个添加的时间
             let txt = i - 1 > 0 ? this.data[i - 1] : "";
             this.timeTotal += this.getRandomTime(txt);
-
             var timer = window.setTimeout(() => {
-              let LI = document.createElement("li");
+              //复制slot进来的节点，保证样式与外部一致
+              let oriLi = parent.firstChild.cloneNode(true);
+              let LI = oriLi || document.createElement("li");
               let res = `${this.data[i]}`;
               let NUM = this.getCurNum();
               LI.className = `txt-${NUM}`;
