@@ -113,37 +113,9 @@ font-size: re(16);
     color:#f75555;
 }
 //代码块样式
-.code {
-    display: inline-block;
-    text-align: left;
-    width:100%;
-    background: #fafafa;
-    transition: all 0.5s;
-    .tips{
-        width:90%;
-        padding:re(10);
-        background:white;
-        margin:re(10) auto;
-        font-size: re(14);
-        border:1px solid #f0f0f0
-    }
-    pre{
-        font-size: 0;
-    }
-    code{
-        font-size: re(12);
-        line-height: 1.8;
-        &::-webkit-scrollbar {
-            width:re(16);
-            height:re(8);
-            display: block;
-        } 
-        &::-webkit-scrollbar-thumb  
-        {  
-            border-radius: re(4);  
-            background-color: #999; 
-        } 
-    }
+pre{
+    overflow-x: auto !important;
+    font-size: re(16) !important;
 }
 //标题样式
 .info{

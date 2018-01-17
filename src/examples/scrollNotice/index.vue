@@ -15,10 +15,11 @@
         </ScrollNotice>
         <div class="btn-showCode"
             @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
-        <div class="code"
-            v-show="isShowCode">
-            <vueCode :code="code" />
-        </div>
+        <pre class="code language-markup"
+            v-show="isShowCode"
+            v-html="html">
+            <!-- <vueCode :code="code" /> -->
+        </pre>
     </div>
 </template>
 
@@ -28,12 +29,12 @@
       data() {
         return {
           code: `
-                    <ScrollNotice class="scroll-notice" :textLimit='5'>
-                        <li v-for="(item,index) in carousel" :key="index">
-                            恭喜
-                            <span class="hightlight" v-text="item.nick"></span>，获得了{{item.message}}！
-                        </li>
-                    </ScrollNotice>`,
+                                <ScrollNotice class="scroll-notice" :textLimit='5'>
+                                    <li v-for="(item,index) in carousel" :key="index">
+                                        恭喜
+                                        <span class="hightlight" v-text="item.nick"></span>，获得了{{item.message}}！
+                                    </li>
+                                </ScrollNotice>`,
           isShowCode: false,
           carousel: [
             { nick: "第1个人的名字", message: "一顿汉堡" },
@@ -43,9 +44,6 @@
             { nick: "第5个人的名字", message: "一顿汉堡" }
           ]
         };
-      },
-      created() {
-        document.querySelector("pre");
       },
       components: { ScrollNotice }
     };
