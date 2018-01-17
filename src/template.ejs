@@ -7,12 +7,10 @@
     <title>
         huodong-ui
     </title>
-    <link href="/static/highlight/atom-one-light.css" rel="stylesheet">
-    <script src="/static/highlight/highlight.pack.js"></script>
     <script type="text/javascript">
-        /*rem初始化*/ ! function(a) {
+        /*rem初始化*/ ! function (a) {
             function b() {
-                if (a.navigator.appVersion.match(/window|ipad/gi)) {
+                if (a.navigator.appVersion.match(/window|ipad|Mac/gi)) {
                     m = f.getBoundingClientRect().width > 960 ? 720 : f.getBoundingClientRect().width;
                 } else {
                     m = f.getBoundingClientRect().width;
@@ -25,11 +23,11 @@
                 e = 1 / d,
                 f = document.documentElement,
                 g = document.createElement("meta");
-            if (a.dpr = d, a.addEventListener("resize", function() {
-                    clearTimeout(c), c = setTimeout(b, 300)
-                }, !1), a.addEventListener("pageshow", function(a) {
-                    a.persisted && (clearTimeout(c), c = setTimeout(b, 300))
-                }, !1), f.setAttribute("data-dpr", d), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + e + ", maximum-scale=" + e + ", minimum-scale=" + e + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g);
+            if (a.dpr = d, a.addEventListener("resize", function () {
+                clearTimeout(c), c = setTimeout(b, 300)
+            }, !1), a.addEventListener("pageshow", function (a) {
+                a.persisted && (clearTimeout(c), c = setTimeout(b, 300))
+            }, !1), f.setAttribute("data-dpr", d), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + e + ", maximum-scale=" + e + ", minimum-scale=" + e + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g);
             else {
                 var h = document.createElement("div");
                 h.appendChild(g), document.write(h.innerHTML)
@@ -47,5 +45,5 @@
 
 </html>
 
-    <script>
-    </script>
+<script>
+</script>

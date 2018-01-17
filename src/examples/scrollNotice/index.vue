@@ -6,8 +6,10 @@
         </div>
         <ScrollNotice class="scroll-notice"
             :textLimit='5'>
-            <li v-for="item in carousel.slice(0,carousel.length)">
-                恭喜<span class="hightlight"
+            <li v-for="(item,index) in carousel"
+                :key="index">
+                恭喜
+                <span class="hightlight"
                     v-text="item.nick"></span>，获得了{{item.message}}！
             </li>
         </ScrollNotice>
@@ -15,16 +17,7 @@
             @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
         <div class="code"
             v-show="isShowCode">
-            <pre v-pre>
-                <code>
-        &ltScrollNotice :carousel="carousel"
-            class="scroll-notice"&gt
-            &ltli v-for="item in carousel.slice(0,carousel.length)"&gt
-                恭喜&ltspan class="hightlight" v-text="item.nick"&gt&lt/span&gt，获得了{{item.message}}！
-            &lt/li&gt
-        &lt/ScrollNotice&gt
-                </code>
-            </pre>
+            <vueCode :code="code" />
         </div>
     </div>
 </template>
@@ -34,6 +27,13 @@
     export default {
       data() {
         return {
+          code: `
+                    <ScrollNotice class="scroll-notice" :textLimit='5'>
+                        <li v-for="(item,index) in carousel" :key="index">
+                            恭喜
+                            <span class="hightlight" v-text="item.nick"></span>，获得了{{item.message}}！
+                        </li>
+                    </ScrollNotice>`,
           isShowCode: false,
           carousel: [
             { nick: "第1个人的名字", message: "一顿汉堡" },
@@ -43,6 +43,9 @@
             { nick: "第5个人的名字", message: "一顿汉堡" }
           ]
         };
+      },
+      created() {
+        document.querySelector("pre");
       },
       components: { ScrollNotice }
     };

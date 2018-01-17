@@ -26,24 +26,11 @@
         <div class="code"
             v-show="isShowCode">
             <pre>
-                <code >
-        &ltcanvasCpl :opt="{
-            count: 5,
-            colorPolygon: '#e1b073',
-            colorText: '#97573e',
-            colorFill: 'rgba(255,91,74,0.6)',
-            colorFillCircle:'#ff5b4a',
-            }"
-            :data="[
-            ['艺术', 90],
-            ['活力', 83],
-            ['体育', 71],
-            ['算数', 52],
-            ['语言', 30]
-        ]"&gt
-        &lt/canvasCpl&gt
-                </code>
+                <code class="language-markup" v-html="html"></code>
             </pre>
+            <!-- <vueCode :code="code" /> -->
+
+            {{html}}
         </div>
         <table class="attributes">
             <caption class="title">Attributes</caption>
@@ -76,13 +63,36 @@
 
 <script>
     import canvasCpl from "../../packages/radar/index";
+    import prism from "prismjs";
     export default {
       data() {
         return {
-          isShowCode: false
+          isShowCode: false,
+          html: "",
+          code: `
+                <canvasCpl class="canvas" :opt="{
+                        count: 5,//边数
+                        colorPolygon: '#e1b073',//填充颜色
+                        colorText: '#97573e',//文字颜色
+                        colorFill: 'rgba(255,91,74,0.6)',//填充色
+                        colorFillCircle:'#ff5b4a',//圆的填充色
+                    }"
+                    
+                    :data="[
+                        ['艺术', 90],
+                        ['活力', 83],
+                        ['体育', 71],
+                        ['算数', 52],
+                        ['语言', 30]
+                    ]">
+                </canvasCpl>
+                `
         };
       },
-      components: { canvasCpl }
+      components: { canvasCpl },
+      mounted() {
+        // this.html = prism.highlight(this.code, prism.languages.markup);
+      }
     };
 </script>
 
