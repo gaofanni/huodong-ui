@@ -24,15 +24,15 @@
         <div class="btn-showCode"
             @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
         <div class="code"
-            v-show="isShowCode">
-            <pre>
+            v-show="isShowCode"
+            style="height:1000px">
+            <pre style="height:1000px"
+                class="language-markup">
                 <code class="language-markup" v-html="html"></code>
             </pre>
             <!-- <vueCode :code="code" /> -->
-
-            {{html}}
         </div>
-        <table class="attributes">
+        <!-- <table class="attributes">
             <caption class="title">Attributes</caption>
             <thead class="">
                 <th>参数</th>
@@ -57,7 +57,7 @@
                     <td>-</td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
     </div>
 </template>
 
@@ -70,28 +70,28 @@
           isShowCode: false,
           html: "",
           code: `
-                <canvasCpl class="canvas" :opt="{
-                        count: 5,//边数
-                        colorPolygon: '#e1b073',//填充颜色
-                        colorText: '#97573e',//文字颜色
-                        colorFill: 'rgba(255,91,74,0.6)',//填充色
-                        colorFillCircle:'#ff5b4a',//圆的填充色
-                    }"
-                    
-                    :data="[
-                        ['艺术', 90],
-                        ['活力', 83],
-                        ['体育', 71],
-                        ['算数', 52],
-                        ['语言', 30]
-                    ]">
-                </canvasCpl>
-                `
+                                        <canvasCpl class="canvas" :opt="{
+                                                count: 5,//边数
+                                                colorPolygon: '#e1b073',//填充颜色
+                                                colorText: '#97573e',//文字颜色
+                                                colorFill: 'rgba(255,91,74,0.6)',//填充色
+                                                colorFillCircle:'#ff5b4a',//圆的填充色
+                                            }"
+                                            
+                                            :data="[
+                                                ['艺术', 90],
+                                                ['活力', 83],
+                                                ['体育', 71],
+                                                ['算数', 52],
+                                                ['语言', 30]
+                                            ]">
+                                        </canvasCpl>
+                                        `
         };
       },
       components: { canvasCpl },
       mounted() {
-        // this.html = prism.highlight(this.code, prism.languages.markup);
+        this.html = prism.highlight(this.code, prism.languages.markup);
       }
     };
 </script>
