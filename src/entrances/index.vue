@@ -11,6 +11,7 @@
         <router-link :to="{name:'lotto'}">lotto 抽奖乐透</router-link>
         <router-link :to="{name:'scrollNotice'}">scrollNotice 跑马灯</router-link>
         <router-link :to="{name:'barrage'}">barrage 弹幕</router-link>
+        <router-link :to="{name:'gameboxShare'}">gameboxShare 游戏盒分享</router-link>
       </aside>
       <section class='container'>
         <div class="inner">
@@ -23,18 +24,18 @@
 </template>
 
 <script>
-  export default {
-    name: "root",
-    data() {
-      return {
-        isShowAside: false
-      };
-    },
-    mounted() {},
-    computed: {},
-    methods: {},
-    components: {}
-  };
+export default {
+  name: "root",
+  data() {
+    return {
+      isShowAside: false
+    };
+  },
+  mounted() {},
+  computed: {},
+  methods: {},
+  components: {}
+};
 </script>
 
 <style lang="scss">

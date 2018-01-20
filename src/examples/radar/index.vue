@@ -13,20 +13,33 @@
                 colorFillCircle:'#ff5b4a',//圆的填充色
                 }"
                 :data="[
-                ['艺术', 90],
-                ['活力', 83],
-                ['体育', 71],
-                ['算数', 52],
-                ['语言', 30]
+                    {
+                        txt:'艺术',
+                        num:90
+                    },{
+                        txt:'活力',
+                        num:83
+                    },{
+                        txt:'体育',
+                        num:71
+                    },{
+                        txt:'算数',
+                        num:52
+                    },{
+                        txt:'语言',
+                        num:30
+                    }
                 ]">
             </canvasCpl>
         </div>
         <div class="btn-showCode"
             @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
-        <pre class="code language-markup"
-            v-show="isShowCode"
-            v-html="html">
+        <div class="code-wrap">
+            <pre class="code language-markup"
+                v-show="isShowCode"
+                v-html="html">
         </pre>
+        </div>
         <table class="attributes">
             <caption class="title">Attributes</caption>
             <thead class="">
@@ -57,33 +70,44 @@
 </template>
 
 <script>
-    import canvasCpl from "../../packages/radar/index";
-    export default {
-      data() {
-        return {
-          isShowCode: false,
-          code: `
-                            <canvasCpl class="canvas" :opt="{
-                                    count: 5,//边数
-                                    colorPolygon: '#e1b073',//填充颜色
-                                    colorText: '#97573e',//文字颜色
-                                    colorFill: 'rgba(255,91,74,0.6)',//填充色
-                                    colorFillCircle:'#ff5b4a',//圆的填充色
-                                }"
-                                
-                                :data="[
-                                    ['艺术', 90],
-                                    ['活力', 83],
-                                    ['体育', 71],
-                                    ['算数', 52],
-                                    ['语言', 30]
-                                ]">
-                            </canvasCpl>
-                            `
-        };
-      },
-      components: { canvasCpl }
+import canvasCpl from "../../packages/radar/index";
+export default {
+  data() {
+    return {
+      isShowCode: false,
+      code: `
+    <canvasCpl class="canvas" :opt="{
+            count: 5,//边数
+            colorPolygon: '#e1b073',//填充颜色
+            colorText: '#97573e',//文字颜色
+            colorFill: 'rgba(255,91,74,0.6)',//填充色
+            colorFillCircle:'#ff5b4a',//圆的填充色
+        }"
+        
+        :data="[
+            {
+                txt:'艺术',
+                num:90
+            },{
+                txt:'活力',
+                num:83
+            },{
+                txt:'体育',
+                num:71
+            },{
+                txt:'算数',
+                num:52
+            },{
+                txt:'语言',
+                num:30
+            }
+        ]">
+    </canvasCpl>
+    `
     };
+  },
+  components: { canvasCpl }
+};
 </script>
 
 <style lang="scss" scoped>

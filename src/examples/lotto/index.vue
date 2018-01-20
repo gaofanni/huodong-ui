@@ -27,90 +27,15 @@
         </Lotto>
         <div class="btn-showCode"
             @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
-        <div class="code"
+        <div class="code-wrap"
             v-show="isShowCode">
             <div class="tips">
                 通过v-for插槽增加抽奖的单元个数，注意<span class='hl'>:slot='`box${index+1}`'</span>需对应index传入，预览效果为一次中奖一次没中奖
             </div>
-            <pre>
-                <code>
-        &ltLotto :get="lottoResult:Object"   
-            :rewardList="rewardList:Array" 
-            :isGameBegin='gameBegin'
-            :num='scrollNum'
-            @checkGamePermission="checkGamePermission"
-            @lottoOver="lottoOver"&gt
-            &ltdiv class="box"
-                :slot='`box${index+1}`'
-                v-for="(ele,index) in scrollNum"&gt
-                &ltdiv class="content"&gt
-                    &ltul&gt
-                        &ltli ref="scrollEl1"
-                            class="goods"
-                            v-for="(item,index) in rewardList"
-                            :class="`gift-${item.key}-s`"&gt&lt/li&gt
-                    &lt/ul&gt
-                &lt/div&gt
-            &lt/div&gt
-            &ltdiv slot='btn-begin' class='btn btn-begin'&gt&lt/div&gt
-        &lt/Lotto&gt
-
-        &ltscript&gt
-            export default {
-                data() {
-                return {
-                    isShowCode: false,
-                    lottoResult: {},
-                    rewardList: [
-                    {
-                        key: "sizhongfen"
-                    },
-                    {
-                        key: "cake"
-                    },
-                    {
-                        key: "shengrikuaile"
-                    },
-                    {
-                        key: "laosiji"
-                    },
-                    {
-                        key: "shoujizhijia"
-                    },
-                    {
-                        key: "baozhen"
-                    },
-                    {
-                        key: "bangbangtang"
-                    },
-                    {
-                        key: "gouliang"
-                    }
-                    ],
-                    gameBegin: false,
-                    scrollNum: 3
-                };
-                },
-                methods: {
-                    checkGamePermission() {
-                        this.gameBegin = true;
-                    },
-                    lottoOver() {
-                        if (this.lottoResult.index) {
-                            alert("中奖啦");
-                            this.lottoResult = {}; //模拟没中奖
-                        } else {
-                            alert("没中奖");
-                            this.lottoResult = {index: 1};//模拟中奖
-                        }
-                        this.gameBegin = false;
-                    }
-                },
-                components: { Lotto }
-            }
-        &lt/script&gt
-                </code>
-            </pre>
+            <pre class="code language-markup"
+                v-show="isShowCode"
+                v-html="html">
+        </pre>
         </div>
         <table class="attributes">
             <caption class="title">Attributes</caption>
@@ -176,64 +101,140 @@
 </template>
 
 <script>
-    import Lotto from "../../packages/lotto/index";
-    export default {
-      data() {
-        return {
-          isShowCode: false,
-          lottoResult: {},
-          rewardList: [
-            {
-              key: "sizhongfen"
-            },
-            {
-              key: "cake"
-            },
-            {
-              key: "shengrikuaile"
-            },
-            {
-              key: "laosiji"
-            },
-            {
-              key: "shoujizhijia"
-            },
-            {
-              key: "baozhen"
-            },
-            {
-              key: "bangbangtang"
-            },
-            {
-              key: "gouliang"
-            }
-          ],
-          gameBegin: false,
-          scrollNum: 3
-        };
-      },
-      methods: {
-        checkGamePermission() {
-          this.gameBegin = true;
+import Lotto from "../../packages/lotto/index";
+export default {
+  data() {
+    return {
+      isShowCode: false,
+      code: `
+                <Lotto :get="lottoResult"
+                    :rewardList="rewardList"
+                    :num='scrollNum'
+                    :isGameBegin='gameBegin'
+                    @checkGamePermission="checkGamePermission"
+                    @lottoOver="lottoOver">
+                    <div class="box"
+                        :slot="\`box\${index+1}\`"
+                        v-for="(ele,index) in scrollNum">
+                        <div class="content">
+                            <ul>
+                                <li ref="scrollEl1"
+                                    class="goods"
+                                    v-for="(item,index) in rewardList"
+                                    :class="\`gift-\${item.key}-s\`"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div slot='btn-begin'
+                        class='btn btn-begin'></div>
+                </Lotto>
+
+                <script>
+                    export default {
+                        data() {
+                        return {
+                            lottoResult: {},
+                            rewardList: [
+                            {
+                                key: "sizhongfen"
+                            },
+                            {
+                                key: "cake"
+                            },
+                            {
+                                key: "shengrikuaile"
+                            },
+                            {
+                                key: "laosiji"
+                            },
+                            {
+                                key: "shoujizhijia"
+                            },
+                            {
+                                key: "baozhen"
+                            },
+                            {
+                                key: "bangbangtang"
+                            },
+                            {
+                                key: "gouliang"
+                            }
+                            ],
+                            gameBegin: false,
+                            scrollNum: 3
+                        };
+                        },
+                        methods: {
+                            checkGamePermission() {
+                                this.gameBegin = true;
+                            },
+                            lottoOver() {
+                                if (this.lottoResult.index) {
+                                    alert("中奖啦");
+                                    this.lottoResult = {}; //模拟没中奖
+                                } else {
+                                    alert("没中奖");
+                                    this.lottoResult = {index: 1};//模拟中奖
+                                }
+                                this.gameBegin = false;
+                            }
+                        },
+                        components: { Lotto }
+                    }
+                <\/script>`,
+      lottoResult: {},
+      rewardList: [
+        {
+          key: "sizhongfen"
         },
-        lottoOver() {
-          if (this.lottoResult.index) {
-            alert("中奖啦");
-            this.lottoResult = {}; //模拟没中奖
-          } else {
-            alert("没中奖");
-            this.lottoResult = {
-              index: 1
-            };
-          }
-          this.gameBegin = false;
+        {
+          key: "cake"
+        },
+        {
+          key: "shengrikuaile"
+        },
+        {
+          key: "laosiji"
+        },
+        {
+          key: "shoujizhijia"
+        },
+        {
+          key: "baozhen"
+        },
+        {
+          key: "bangbangtang"
+        },
+        {
+          key: "gouliang"
         }
-      },
-      components: { Lotto }
+      ],
+      gameBegin: false,
+      scrollNum: 3
     };
+  },
+  methods: {
+    checkGamePermission() {
+      this.gameBegin = true;
+    },
+    lottoOver() {
+      if (this.lottoResult.index) {
+        alert("中奖啦");
+        this.lottoResult = {}; //模拟没中奖
+      } else {
+        alert("没中奖");
+        this.lottoResult = {
+          index: 1
+        };
+      }
+      this.gameBegin = false;
+    }
+  },
+  components: { Lotto }
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import "../../common/sass/global";
     $base: "./images/";
     .box {

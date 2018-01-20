@@ -18,7 +18,6 @@
         <pre class="code language-markup"
             v-show="isShowCode"
             v-html="html">
-            <!-- <vueCode :code="code" /> -->
         </pre>
     </div>
 </template>
@@ -29,12 +28,12 @@
       data() {
         return {
           code: `
-                                <ScrollNotice class="scroll-notice" :textLimit='5'>
-                                    <li v-for="(item,index) in carousel" :key="index">
-                                        恭喜
-                                        <span class="hightlight" v-text="item.nick"></span>，获得了{{item.message}}！
-                                    </li>
-                                </ScrollNotice>`,
+            <ScrollNotice class="scroll-notice" :textLimit='5'>
+                <li v-for="(item,index) in carousel" :key="index">
+                    恭喜
+                    <span class="hightlight" v-text="item.nick"></span>，获得了{{item.message}}！
+                </li>
+            </ScrollNotice>`,
           isShowCode: false,
           carousel: [
             { nick: "第1个人的名字", message: "一顿汉堡" },

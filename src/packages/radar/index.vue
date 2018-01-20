@@ -25,8 +25,8 @@
         ctx.save();
         let r = center / 22;
         for (let i = 0; i < count; i++) {
-          let x = this.getXY(radius, i, this.data[i][1]).x;
-          let y = this.getXY(radius, i, this.data[i][1]).y;
+          let x = this.getXY(radius, i, this.data[i]["num"]).x;
+          let y = this.getXY(radius, i, this.data[i]["num"]).y;
           ctx.beginPath();
           ctx.arc(x, y, r, 0, Math.PI * 2);
           ctx.fillStyle = colorFillCircle;
@@ -39,8 +39,8 @@
         ctx.save();
         ctx.beginPath();
         for (let i = 0; i < count; i++) {
-          let y = this.getXY(radius, i, this.data[i][1]).y;
-          let x = this.getXY(radius, i, this.data[i][1]).x;
+          let y = this.getXY(radius, i, this.data[i]["num"]).y;
+          let x = this.getXY(radius, i, this.data[i]["num"]).x;
 
           ctx.lineTo(x, y);
         }
@@ -63,34 +63,34 @@
           if (angle * i > 0 && angle * i <= Math.PI / 2) {
             //右上区域
             ctx.fillText(
-              this.data[i][0],
-              x + ctx.measureText(this.data[i][0]).width / 6,
+              this.data[i]["txt"],
+              x + ctx.measureText(this.data[i]["txt"]).width / 6,
               y
             );
           } else if (angle * i > Math.PI / 2 && angle * i <= Math.PI) {
             //右下
-            ctx.fillText(this.data[i][0], x, y + fontSize);
+            ctx.fillText(this.data[i]["txt"], x, y + fontSize);
           } else if (angle * i > Math.PI && angle * i <= Math.PI * 3 / 2) {
             //左下
             ctx.fillText(
-              this.data[i][0],
-              x - ctx.measureText(this.data[i][0]).width,
+              this.data[i]["txt"],
+              x - ctx.measureText(this.data[i]["txt"]).width,
               y + fontSize
             );
           } else if (angle * i > Math.PI * 3 / 2) {
             //左上
             ctx.fillText(
-              this.data[i][0],
+              this.data[i]["txt"],
               x -
-                ctx.measureText(this.data[i][0]).width -
-                ctx.measureText(this.data[i][0]).width / 6,
+                ctx.measureText(this.data[i]["txt"]).width -
+                ctx.measureText(this.data[i]["txt"]).width / 6,
               y
             );
           } else {
             //居中
             ctx.fillText(
-              this.data[i][0],
-              x - ctx.measureText(this.data[i][0]).width / 2,
+              this.data[i]["txt"],
+              x - ctx.measureText(this.data[i]["txt"]).width / 2,
               y - fontSize / 2
             );
           }

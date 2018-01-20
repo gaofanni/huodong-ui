@@ -24,7 +24,7 @@ top: 0;
 z-index: 1;
 background: white;
 box-shadow: 0 0 1px rgba(0,0,0,0.25);
-@media screen and (max-width:900px) {
+@media screen and (max-width:1180px) {
     .nav{
         background-image: url('https://cn.vuejs.org/images/menu.png');
         width:24px;
@@ -52,7 +52,7 @@ aside {
     top: re(41);
     background:white;
     z-index: 100;
-    @media screen and (max-width: 900px){
+    @media screen and (max-width: 1180px){
         background:#fefefe;
         box-shadow: re(4) re(4) re(10) rgba(0,0,0,0.1);
         transition:all 0.3s;
@@ -80,23 +80,23 @@ aside {
     }
 }
 .container {
-color: #333;
-text-align: center;
-display: inline-block;
-height: 100%;
-width: 100%;
+    color: #333;
+    text-align: center;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
 .inner {
     padding-top: re(20);
 }
 }
 //模块样式
 .wrap {
-width: re(640);
-// box-shadow: 0 0 re(10) rgba(100, 100, 100, 0.2);
-margin: 0 auto;
-background:white;
-padding: re(20) 0;
-font-size: re(16);
+    width: re(640);
+    // box-shadow: 0 0 re(10) rgba(100, 100, 100, 0.2);
+    margin: 0 auto;
+    background:white;
+    padding: re(20) 0;
+    font-size: re(16);
 }
 .btn-showCode{
     width:100%;
@@ -104,7 +104,7 @@ font-size: re(16);
     font-size: re(16);
     line-height: re(40);
     cursor: pointer;
-    background:#f5f5f5;;
+    background:#f8f8f8;;
     color:#646464;
     margin-top: re(20);
     -webkit-user-select: none
@@ -115,7 +115,34 @@ font-size: re(16);
 //代码块样式
 pre{
     overflow-x: auto !important;
-    font-size: re(16) !important;
+    font-size: re(14) !important;
+    font-weight:400;
+    &::-webkit-scrollbar{
+        width: 8px;
+        height: 8px;
+        background-color: #f5f5f5;
+        display: block;
+    }
+    /*定义滚动条的轨道，内阴影及圆角*/
+    &::-webkit-scrollbar-track{
+        border-radius: 10px;
+        background-color: #f5f5f5;
+    }
+    /*定义滑块，内阴影及圆角*/
+    &::-webkit-scrollbar-thumb{
+        /*width: 10px;*/
+        height: 20px;
+        border-radius: 10px;
+        background-color: #999;
+    }
+}
+.code-wrap{
+    .tips{
+        background:#f8f8f8;
+        font-size: re(12);
+        padding:re(10) re(40);
+        text-align: left;
+    }
 }
 //标题样式
 .info{
