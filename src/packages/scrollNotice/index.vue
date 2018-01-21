@@ -1,6 +1,6 @@
 <template>
   <div class="scroll-notice">
-    <ul>
+    <ul ref="scrollWrap">
       <slot></slot>
     </ul>
   </div>
@@ -19,7 +19,7 @@
     },
     methods: {
       moving() {
-        let oLis = document.querySelector("ul").children;
+        let oLis = this.$refs.scrollWrap.children;
         let movingEl = oLis[0].parentNode;
         movingEl.appendChild(oLis[0].cloneNode(true));
         let liHeight = parseFloat(window.getComputedStyle(oLis[0]).height);

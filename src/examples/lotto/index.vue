@@ -1,6 +1,6 @@
 <template>
     <div class="wrap">
-        <div class="info">
+        <!-- <div class="info">
             <div class='title'>抽奖大乐透</div>
             <div class="author">gaofanni</div>
         </div>
@@ -96,142 +96,266 @@
                     <td>--</td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
+        <exampleCpl :info="exampleInfo.info"
+            :code="exampleInfo.code"
+            :tableInfo='exampleInfo.tableInfo'>
+            <Lotto :get="lottoResult"
+                :slot='`componentSlot`'
+                :rewardList="rewardList"
+                :num='scrollNum'
+                :isGameBegin='gameBegin'
+                @checkGamePermission="checkGamePermission"
+                @lottoOver="lottoOver">
+                <div class="box"
+                    :slot='`box${index+1}`'
+                    v-for="(ele,index) in scrollNum">
+                    <div class="content">
+                        <ul>
+                            <li ref="scrollEl1"
+                                class="goods"
+                                v-for="(item,index) in rewardList"
+                                :class="`gift-${item.key}-s`"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div slot='btn-begin'
+                    class='btn btn-begin'></div>
+            </Lotto>
+        </exampleCpl>
     </div>
 </template>
 
 <script>
-import Lotto from "../../packages/lotto/index";
-export default {
-  data() {
-    return {
-      isShowCode: false,
-      code: `
-                <Lotto :get="lottoResult"
-                    :rewardList="rewardList"
-                    :num='scrollNum'
-                    :isGameBegin='gameBegin'
-                    @checkGamePermission="checkGamePermission"
-                    @lottoOver="lottoOver">
-                    <div class="box"
-                        :slot="\`box\${index+1}\`"
-                        v-for="(ele,index) in scrollNum">
-                        <div class="content">
-                            <ul>
-                                <li ref="scrollEl1"
-                                    class="goods"
-                                    v-for="(item,index) in rewardList"
-                                    :class="\`gift-\${item.key}-s\`"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div slot='btn-begin'
-                        class='btn btn-begin'></div>
-                </Lotto>
+    import Lotto from "../../packages/lotto/index";
+    import exampleCpl from "../../components/example/index";
+    export default {
+      data() {
+        return {
+          exampleInfo: {
+            info: { title: "抽奖大乐透", author: "gaofanni" },
+            code: `
+                                                                                    <Lotto :get="lottoResult"
+                                                                                        :rewardList="rewardList"
+                                                                                        :num='scrollNum'
+                                                                                        :isGameBegin='gameBegin'
+                                                                                        @checkGamePermission="checkGamePermission"
+                                                                                        @lottoOver="lottoOver">
+                                                                                        <div class="box"
+                                                                                            :slot="\`box\${index+1}\`"
+                                                                                            v-for="(ele,index) in scrollNum">
+                                                                                            <div class="content">
+                                                                                                <ul>
+                                                                                                    <li ref="scrollEl1"
+                                                                                                        class="goods"
+                                                                                                        v-for="(item,index) in rewardList"
+                                                                                                        :class="\`gift-\${item.key}-s\`"></li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div slot='btn-begin'
+                                                                                            class='btn btn-begin'></div>
+                                                                                    </Lotto>
 
-                <script>
-                    export default {
-                        data() {
-                        return {
-                            lottoResult: {},
-                            rewardList: [
-                            {
-                                key: "sizhongfen"
-                            },
-                            {
-                                key: "cake"
-                            },
-                            {
-                                key: "shengrikuaile"
-                            },
-                            {
-                                key: "laosiji"
-                            },
-                            {
-                                key: "shoujizhijia"
-                            },
-                            {
-                                key: "baozhen"
-                            },
-                            {
-                                key: "bangbangtang"
-                            },
-                            {
-                                key: "gouliang"
-                            }
-                            ],
-                            gameBegin: false,
-                            scrollNum: 3
-                        };
-                        },
-                        methods: {
-                            checkGamePermission() {
-                                this.gameBegin = true;
-                            },
-                            lottoOver() {
-                                if (this.lottoResult.index) {
-                                    alert("中奖啦");
-                                    this.lottoResult = {}; //模拟没中奖
-                                } else {
-                                    alert("没中奖");
-                                    this.lottoResult = {index: 1};//模拟中奖
-                                }
-                                this.gameBegin = false;
-                            }
-                        },
-                        components: { Lotto }
-                    }
-                <\/script>`,
-      lottoResult: {},
-      rewardList: [
-        {
-          key: "sizhongfen"
-        },
-        {
-          key: "cake"
-        },
-        {
-          key: "shengrikuaile"
-        },
-        {
-          key: "laosiji"
-        },
-        {
-          key: "shoujizhijia"
-        },
-        {
-          key: "baozhen"
-        },
-        {
-          key: "bangbangtang"
-        },
-        {
-          key: "gouliang"
-        }
-      ],
-      gameBegin: false,
-      scrollNum: 3
-    };
-  },
-  methods: {
-    checkGamePermission() {
-      this.gameBegin = true;
-    },
-    lottoOver() {
-      if (this.lottoResult.index) {
-        alert("中奖啦");
-        this.lottoResult = {}; //模拟没中奖
-      } else {
-        alert("没中奖");
-        this.lottoResult = {
-          index: 1
+                                                                                    <script>
+                                                                                        export default {
+                                                                                            data() {
+                                                                                            return {
+                                                                                                lottoResult: {},
+                                                                                                rewardList: [
+                                                                                                {
+                                                                                                    key: "sizhongfen"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "cake"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "shengrikuaile"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "laosiji"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "shoujizhijia"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "baozhen"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "bangbangtang"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "gouliang"
+                                                                                                }
+                                                                                                ],
+                                                                                                gameBegin: false,
+                                                                                                scrollNum: 3
+                                                                                            };
+                                                                                            },
+                                                                                            methods: {
+                                                                                                checkGamePermission() {
+                                                                                                    this.gameBegin = true;
+                                                                                                },
+                                                                                                lottoOver() {
+                                                                                                    if (this.lottoResult.index) {
+                                                                                                        alert("中奖啦");
+                                                                                                        this.lottoResult = {}; //模拟没中奖
+                                                                                                    } else {
+                                                                                                        alert("没中奖");
+                                                                                                        this.lottoResult = {index: 1};//模拟中奖
+                                                                                                    }
+                                                                                                    this.gameBegin = false;
+                                                                                                }
+                                                                                            },
+                                                                                            components: { Lotto }
+                                                                                        }
+                                                                                    <\/script>`,
+            tableInfo: {
+              attributes: [
+                {
+                  propName: "lottoResult",
+                  explain: `中奖信息，中奖:{index:中奖的索引},没中奖:{}`,
+                  type: `Object`,
+                  default: `{}`,
+                  choose: "--"
+                }
+              ],
+              events: [
+                {
+                  eventsName: "checkGamePermission",
+                  explain: "点击'点我转一转'按钮触发的事件",
+                  default: "--"
+                }
+              ]
+            }
+          },
+          isShowCode: false,
+          code: `
+                                                                                    <Lotto :get="lottoResult"
+                                                                                        :rewardList="rewardList"
+                                                                                        :num='scrollNum'
+                                                                                        :isGameBegin='gameBegin'
+                                                                                        @checkGamePermission="checkGamePermission"
+                                                                                        @lottoOver="lottoOver">
+                                                                                        <div class="box"
+                                                                                            :slot="\`box\${index+1}\`"
+                                                                                            v-for="(ele,index) in scrollNum">
+                                                                                            <div class="content">
+                                                                                                <ul>
+                                                                                                    <li ref="scrollEl1"
+                                                                                                        class="goods"
+                                                                                                        v-for="(item,index) in rewardList"
+                                                                                                        :class="\`gift-\${item.key}-s\`"></li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div slot='btn-begin'
+                                                                                            class='btn btn-begin'></div>
+                                                                                    </Lotto>
+
+                                                                                    <script>
+                                                                                        export default {
+                                                                                            data() {
+                                                                                            return {
+                                                                                                lottoResult: {},
+                                                                                                rewardList: [
+                                                                                                {
+                                                                                                    key: "sizhongfen"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "cake"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "shengrikuaile"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "laosiji"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "shoujizhijia"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "baozhen"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "bangbangtang"
+                                                                                                },
+                                                                                                {
+                                                                                                    key: "gouliang"
+                                                                                                }
+                                                                                                ],
+                                                                                                gameBegin: false,
+                                                                                                scrollNum: 3
+                                                                                            };
+                                                                                            },
+                                                                                            methods: {
+                                                                                                checkGamePermission() {
+                                                                                                    this.gameBegin = true;
+                                                                                                },
+                                                                                                lottoOver() {
+                                                                                                    if (this.lottoResult.index) {
+                                                                                                        alert("中奖啦");
+                                                                                                        this.lottoResult = {}; //模拟没中奖
+                                                                                                    } else {
+                                                                                                        alert("没中奖");
+                                                                                                        this.lottoResult = {index: 1};//模拟中奖
+                                                                                                    }
+                                                                                                    this.gameBegin = false;
+                                                                                                }
+                                                                                            },
+                                                                                            components: { Lotto }
+                                                                                        }
+                                                                                    <\/script>`,
+          lottoResult: {},
+          rewardList: [
+            {
+              key: "sizhongfen"
+            },
+            {
+              key: "cake"
+            },
+            {
+              key: "shengrikuaile"
+            },
+            {
+              key: "laosiji"
+            },
+            {
+              key: "shoujizhijia"
+            },
+            {
+              key: "baozhen"
+            },
+            {
+              key: "bangbangtang"
+            },
+            {
+              key: "gouliang"
+            }
+          ],
+          gameBegin: false,
+          scrollNum: 3
         };
-      }
-      this.gameBegin = false;
-    }
-  },
-  components: { Lotto }
-};
+      },
+      methods: {
+        checkGamePermission() {
+          this.gameBegin = true;
+        },
+        lottoOver() {
+          if (this.lottoResult.index) {
+            alert("中奖啦");
+            this.lottoResult = {}; //模拟没中奖
+          } else {
+            alert("没中奖");
+            this.lottoResult = {
+              index: 1
+            };
+          }
+          this.gameBegin = false;
+        }
+      },
+      components: { Lotto, exampleCpl }
+    };
 </script>
 
 <style lang="scss" scoped>

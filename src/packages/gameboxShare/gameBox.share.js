@@ -114,130 +114,61 @@ function gameBoxFn() {
         var _allNode = opts.all;
         var _target = opts.target ? document.querySelectorAll(opts.target) : "";
         var _all = opts.all ? document.querySelectorAll(opts.all) : "";
-        if (window.shareAPI) {
-            var SA = window.shareAPI;
 
-            function _openShare() {
-                if (_this.opts.isGetData) {
-                    if (_this.getData) {
-                        var config = extend(_this.getData, _this.opts.config);
-                        config = extraAction(config, _this.opts.activityId, "hasget");
-                        config = JSON.stringify(config);
-                        SA.onJsShare(config);
-                    } else {
-                        window.setShareData = function (e) {
-                            _this.getData = e;
-                            var config = extend(e, _this.opts.config);
-                            config = extraAction(config, _this.opts.activityId, "noget");
-                            config = JSON.stringify(config);
-                            SA.onJsShare(config);
-                        };
-                        SA.getShareData();
-                    }
-
-                } else {
-                    var config = _this.opts.config;
-                    config = extraAction(config, _this.opts.activityId, "noget");
-                    SA.onJsShare(JSON.stringify(config));
-                }
-            }
-
-            window.shareCompleted = function (e) {
-                _this.opts.complete(e);
-            };
-
-            window.openShare = function () {
-                if (_this.opts.openShare) {
-                    _this.opts.openShare();
-                } else {
-                    _openShare();
-                }
-
-            };
-            _this.openShare = window.openShare;
-
-            if (_allNode) {
-                document.body.addEventListener("click", function () {
-                    var e = e || window.event;
-                    var t = document.querySelector(_targetNode);
-                    if (!nodeFilter(t, _allNode)) {
-                        return;
-                    }
-
-                    if (!_this.opts.before()) return;
-
-                    _openShare();
-                });
-            }
-
-            if (!_targetNode) {
-                return;
-            }
-
-            document.body.addEventListener("click", function (e) {
+        if (!_targetNode) {
+            return;
+        }
+        let _targetNodeAll = document.querySelectorAll(_targetNode);
+        for (let n in _targetNodeAll) {
+            _targetNodeAll[n].addEventListener('click', function (e) {
                 var e = e || window.event;
-                var t = document.querySelector(_targetNode);
-                if (!nodeFilter(t, _targetNode)) {
-                    return;
-                }
+                var t = e.currentTarget;
 
-                if (!_this.opts.before()) return;
+                if (_this.opts.before && !_this.opts.before()) return;
+                if (window.shareAPI) {
+                    var SA = window.shareAPI;
 
-                var opts = _this.opts;
-                var shareType = t.getAttribute("data-type");
-                var config = {};
+                    window.shareCompleted = function (e) {
+                        _this.opts.complete(e);
+                    };
 
-                if (opts.isGetData) {
-
-                    if (_this.getData) {
-                        var merge = extend(_this.getData, opts.config);
-                        var config = mergeConfig(merge, shareType);
-
-                        config = extraAction(config, _this.opts.activityId, "hasget");
-                        SA.onJsShareForType(JSON.stringify(config));
-                    } else {
-                        window.setShareData = function (e) {
-                            var e = e;
-                            if (typeof e == "string") {
-                                e = JSON.parse(e);
-                            }
-                            _this.getData = e;
-                            var merge = e ? extend(e, opts.config) : opts.config;
+                    var opts = _this.opts;
+                    var shareType = t.getAttribute("data-type");
+                    var config = {};
+                    if (opts.isGetData) {
+                        if (_this.getData) {
+                            var merge = extend(_this.getData, opts.config);
                             var config = mergeConfig(merge, shareType);
 
-                            config = extraAction(config, _this.opts.activityId, "noget");
-
+                            config = extraAction(config, _this.opts.activityId, "hasget");
                             SA.onJsShareForType(JSON.stringify(config));
-                        };
-                        SA.getShareData();
+                        } else {
+                            window.setShareData = function (e) {
+                                var e = e;
+                                if (typeof e == "string") {
+                                    e = JSON.parse(e);
+                                }
+                                _this.getData = e;
+                                var merge = e ? extend(e, opts.config) : opts.config;
+                                var config = mergeConfig(merge, shareType);
+
+                                config = extraAction(config, _this.opts.activityId, "noget");
+                                SA.onJsShareForType(JSON.stringify(config));
+                            };
+                            SA.getShareData();
+                        }
+
+                    } else {
+                        var merge = opts.config;
+                        config = mergeConfig(merge, shareType);
+                        config = extraAction(config, _this.opts.activityId, "noget");
+                        SA.onJsShareForType(JSON.stringify(config));
                     }
 
-                } else {
-                    var merge = opts.config;
-                    config = mergeConfig(merge, shareType);
-                    config = extraAction(config, _this.opts.activityId, "noget");
-                    SA.onJsShareForType(JSON.stringify(config));
-                }
-            });
-        } else if (window.android) {
-            var A = window.android;
+                } else if (window.android) {
+                    var A = window.android;
 
-            window.set_share_config = function () { };
-
-            if (_allNode) {
-                if (window["shareCallback"]) {
-                    A.bindEvent('share', 'shareCallback');
-                }
-
-                document.body.addEventListener("click", function () {
-                    var e = e || window.event;
-                    var t = e.target;
-                    if (!nodeFilter(t, _allNode)) {
-                        return;
-                    }
-
-                    if (!_this.opts.before()) return;
-
+                    window.set_share_config = function () { };
                     var opts = _this.opts;
                     var config = {};
                     opts.config.title ? config.title = opts.config.title : "";
@@ -248,52 +179,22 @@ function gameBoxFn() {
                     for (var i in config) {
                         cn++;
                     }
+                    var shareType = t.getAttribute("data-type");
+                    if (!shareType) return;
+                    var callBack = 'shareCallback' + shareType.charAt(0).toUpperCase() + shareType.substring(1);
+                    if (window[callBack]) {
+                        A.bindEvent('share', callBack);
+                    }
                     if (cn) {
                         config = JSON.stringify(config);
                         A.onJsShareConfig(config);
                     }
-
-                    A.onJsShare();
-                });
-            }
-
-            if (!_targetNode) {
-                return;
-            }
-
-            document.body.addEventListener("click", function () {
-                var e = e || window.event;
-                var t = e.target;
-                if (!nodeFilter(t, _targetNode)) {
-                    return;
+                    A.onJsShareForType(shareType);
                 }
 
-                if (!_this.opts.before()) return;
-
-                var opts = _this.opts;
-                var config = {};
-                opts.config.title ? config.title = opts.config.title : "";
-                opts.config.desc ? config.desc = opts.config.desc : "";
-                opts.config.param ? config.param = opts.config.param : "";
-                config = extend(opts.config, config);
-                var cn = 0;
-                for (var i in config) {
-                    cn++;
-                }
-                var shareType = t.getAttribute("data-type");
-                if (!shareType) return;
-                var callBack = 'shareCallback' + shareType.charAt(0).toUpperCase() + shareType.substring(1);
-                if (window[callBack]) {
-                    A.bindEvent('share', callBack);
-                }
-                if (cn) {
-                    config = JSON.stringify(config);
-                    A.onJsShareConfig(config);
-                }
-                A.onJsShareForType(shareType);
             });
-
         }
+
 
     };
 
