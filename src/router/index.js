@@ -6,7 +6,7 @@ Vue.use(Router);
 
 const router = new Router({
     routes: [
-        { path: "/", component: Radar, name: 'radar' },
+        { path: "/", component: Radar, name: 'index' },
         { path: "/radar", component: Radar, name: 'radar' },
         { path: '/lotto', component: () => import('../examples/lotto/index'), name: 'lotto' },
         { path: '/scrollNotice', component: () => import('../examples/scrollNotice/index'), name: 'scrollNotice' },

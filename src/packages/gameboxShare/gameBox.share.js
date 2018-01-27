@@ -79,7 +79,7 @@ function gameBoxFn() {
                 config.shareUrl = config.shareUrl.replace(/&*ext=\S*/gi, "");
                 config.shareUrl = config.shareUrl + newUri;
             } else {
-                config.shareUrl = config.shareUrl + newUri;
+                config.shareUrl = config.shareUrl + '?' + newUri;
             }
 
             if (type == "hasget") {

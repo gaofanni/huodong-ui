@@ -1,51 +1,47 @@
 <template>
     <div class="wrap">
-        <div class="info">
-            <div class='title'>跑马灯</div>
-            <div class="author">gaofanni</div>
-        </div>
-        <ScrollNotice class="scroll-notice"
-            :textLimit='5'>
-            <li v-for="(item,index) in carousel"
-                :key="index">
-                恭喜
-                <span class="hightlight"
-                    v-text="item.nick"></span>，获得了{{item.message}}！
-            </li>
-        </ScrollNotice>
-        <div class="btn-showCode"
-            @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
-        <pre class="code language-markup"
-            v-show="isShowCode"
-            v-html="html">
-        </pre>
+        <Example :info="exampleInfo.info"
+            :code="exampleInfo.code">
+            <ScrollNotice class="scroll-notice"
+                :textLimit='5'>
+                <li v-for="(item,index) in carousel"
+                    :key="index">
+                    恭喜
+                    <span class="hightlight"
+                        v-text="item.nick"></span>，获得了{{item.message}}！
+                </li>
+            </ScrollNotice>
+        </Example>
     </div>
 </template>
 
 <script>
-    import ScrollNotice from "../../packages/scrollNotice/index";
-    export default {
-      data() {
-        return {
-          code: `
+import ScrollNotice from "../../packages/scrollNotice/index";
+import Example from "../../components/example/index";
+export default {
+  data() {
+    return {
+      exampleInfo: {
+        info: { title: "跑马灯", author: "gaofanni" },
+        code: `
             <ScrollNotice class="scroll-notice" :textLimit='5'>
                 <li v-for="(item,index) in carousel" :key="index">
                     恭喜
                     <span class="hightlight" v-text="item.nick"></span>，获得了{{item.message}}！
                 </li>
-            </ScrollNotice>`,
-          isShowCode: false,
-          carousel: [
-            { nick: "第1个人的名字", message: "一顿汉堡" },
-            { nick: "第2个人的名字", message: "一顿汉堡" },
-            { nick: "第3个人的名字", message: "一顿汉堡" },
-            { nick: "第4个人的名字", message: "一顿汉堡" },
-            { nick: "第5个人的名字", message: "一顿汉堡" }
-          ]
-        };
+            </ScrollNotice>`
       },
-      components: { ScrollNotice }
+      carousel: [
+        { nick: "第1个人的名字", message: "一顿汉堡" },
+        { nick: "第2个人的名字", message: "一顿汉堡" },
+        { nick: "第3个人的名字", message: "一顿汉堡" },
+        { nick: "第4个人的名字", message: "一顿汉堡" },
+        { nick: "第5个人的名字", message: "一顿汉堡" }
+      ]
     };
+  },
+  components: { ScrollNotice, Example }
+};
 </script>
 
 <style lang="scss" scoped>

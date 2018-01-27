@@ -4,21 +4,21 @@
             <div class='title'>{{info.title}}</div>
             <div class="author">{{info.author}}</div>
         </div>
-        <slot name='componentSlot'></slot>
+        <slot></slot>
         <div class="btn-showCode"
             @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
         <div class="code-wrap"
             v-show="isShowCode">
-            <div class="tips">
-                通过v-for插槽增加抽奖的单元个数，注意
-                <span class='hl'>:slot='`box${index+1}`'</span>需对应index传入，预览效果为一次中奖一次没中奖
+            <div class="tips"
+                v-html="tips">
             </div>
             <pre class="code language-markup"
                 v-show="isShowCode"
                 v-html="html">
-        </pre>
+            </pre>
         </div>
-        <table class="attributes">
+        <table class="attributes"
+            v-if="tableInfo.attributes">
             <caption class="title">Attributes</caption>
             <thead>
                 <th>参数</th>
@@ -37,7 +37,8 @@
                 </tr>
             </tbody>
         </table>
-        <table class='events'>
+        <table class='events'
+            v-if="tableInfo.events">
             <caption class="title">Events</caption>
             <thead>
                 <th>事件名</th>
@@ -56,15 +57,31 @@
 </template>
 
 <script>
-    export default {
-      props: ["info", "code", "tips", "tableInfo"],
-      data() {
-        return {
-          isShowCode: false
-        };
-      },
-      methods: {},
-      components: {}
+export default {
+  name: "example",
+  props: {
+    info: {
+      default: {}
+    },
+    code: {
+      default: {}
+    },
+    tips: {
+      default: ""
+    },
+    tableInfo: {
+      default() {
+        return {};
+      }
+    }
+  },
+  data() {
+    return {
+      isShowCode: false
     };
+  },
+  methods: {},
+  components: {}
+};
 </script>
 

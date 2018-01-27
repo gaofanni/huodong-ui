@@ -161,6 +161,9 @@ pre{
 }
 //表格样式
 table{
+    margin-top: re(20);
+    font-size: re(14);
+    width:100%;
     .title{
         text-align: left;
         font-size: re(20);
@@ -168,14 +171,6 @@ table{
         line-height: re(40);
         padding-left: re(10);
         color:#3182bd;
-    }
-    display: inline-block;
-    margin-top: re(20);
-    font-size: re(14);
-    &.events{
-        td,th{
-            min-width: re(170);
-        }
     }
     td,th{
         padding-left:re(10);
