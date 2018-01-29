@@ -97,6 +97,13 @@ function gameBoxFn() {
 
         return config;
     };
+    var isDOM = (typeof HTMLElement === 'object') ?
+        function (obj) {
+            return obj instanceof HTMLElement;
+        } :
+        function (obj) {
+            return obj && typeof obj === 'object' && obj.nodeType === 1 && typeof obj.nodeName === 'string';
+        }
     var gameBox = {};
     gameBox.share = function (opt) {
         var _this = this;
@@ -120,6 +127,7 @@ function gameBoxFn() {
         }
         let _targetNodeAll = document.querySelectorAll(_targetNode);
         for (let n in _targetNodeAll) {
+            if (!isDOM(_targetNodeAll[n])) continue;
             _targetNodeAll[n].addEventListener('click', function (e) {
                 var e = e || window.event;
                 var t = e.currentTarget;
@@ -203,7 +211,7 @@ function gameBoxFn() {
             var _this = this;
             _this.opts = extend(_this.opts, config);
             if (!window.shareAPI) {
-                android.onJsShareConfig(JSON.stringify(_this.opts.config));
+                window.android && android.onJsShareConfig(JSON.stringify(_this.opts.config));
             }
         }
     };

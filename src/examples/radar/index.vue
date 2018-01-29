@@ -51,7 +51,6 @@ export default {
             colorFill: 'rgba(255,91,74,0.6)',//填充色
             colorFillCircle:'#ff5b4a',//圆的填充色
         }"
-        
         :data="[
             {
                 txt:'艺术',

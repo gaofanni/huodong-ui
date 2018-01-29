@@ -1,7 +1,9 @@
 <template>
   <div class="wrap">
     <Example :info="exampleInfo.info"
-      :code="exampleInfo.code">
+      :code="exampleInfo.code"
+      :tips="exampleInfo.tip"
+      :tableInfo="exampleInfo.tableInfo">
       <shareCpl class="share-wrap"
         :configData="configData"
         :data="shareData"
@@ -9,9 +11,7 @@
         @shareFail="shareFail">
         <div class='shareout'
           :slot="item.type"
-          v-for="item in shareData"
-          :key="item.type"
-          :data-type='item.type'>
+          v-for="item in shareData">
           <span :class="[item.type,'share-icon']"></span>
           <div class="title">{{item.title}}</div>
         </div>
@@ -55,53 +55,68 @@ export default {
       exampleInfo: {
         info: {
           title: "游戏盒分享",
-          author: "gaofanni"
+          author: "gaofanni",
+          tip: "游戏盒内才会生效"
         },
+        tip: "share组件的插槽必须slot入分享的类型，用于内部绑定",
         code: `
-        <shareCpl class="share-wrap"
-            :configData="configData"
-            :data="shareData"
-            @shareSuc="shareSuc"
-            @shareFail="shareFail">
-            <div class='shareout'
-                :slot="item.type"
-                v-for="item in shareData"
-                :key="item.type"
-                :data-type='item.type'>
-                <span :class="[item.type,'share-icon']"></span>
-                <div class="title">{{item.title}}</div>
-            </div>
-        </shareCpl>
-        <script>
-          export default {
-            data(){
-              return {
-                configData: {
-                  title: "4399明星主播联赛，带你一起飞",
-                  content: "4399明星主播联赛，带你一起飞",
-                  iconUrl:"http://mobi.4399tech.com/redirect/proxy.docker.4399api.net/test/t1sj/test_ma/ma~50_20171219093119_5a386be79611d.jpeg?t=1513647079",
-                  redirectUrl: "www.baidu.com",
-                  extra: "test=1"
-                },
-                shareData: [{
-                    type: "qq",
-                    title: "QQ",
-                    showTxt: true
-                  },
-                  {
-                    type: "wx",
-                    title: "微信",
-                    showTxt: true
-                  },
-                  {
-                    type: "qzone",
-                    title: "QQ空间",
-                    showTxt: true
-                  }],
-              }
-            }
-          }
-        <\/script>
+                <shareCpl class="share-wrap"
+                    :configData="configData"
+                    :data="shareData"
+                    @shareSuc="shareSuc"
+                    @shareFail="shareFail">
+                    <div class='shareout'
+                        :slot="item.type"
+                        v-for="item in shareData">
+                        <span :class="[item.type,'share-icon']"></span>
+                        <div class="title">{{item.title}}</div>
+                    </div>
+                </shareCpl>
+                <button @click="change">修改分享参数</button>
+                
+                <script>
+                  export default {
+                    data(){
+                      return {
+                        configData: {
+                          title: "4399明星主播联赛，带你一起飞",
+                          content: "4399明星主播联赛，带你一起飞",
+                          iconUrl:"http://mobi.4399tech.com/redirect/proxy.docker.4399api.net/test/t1sj/test_ma/ma~50_20171219093119_5a386be79611d.jpeg?t=1513647079",
+                          redirectUrl: "www.baidu.com",
+                          extra: "test=1"
+                        },
+                        shareData: [{
+                            type: "qq",
+                            title: "QQ",
+                            showTxt: true
+                          },
+                          {
+                            type: "wx",
+                            title: "微信",
+                            showTxt: true
+                          },
+                          {
+                            type: "qzone",
+                            title: "QQ空间",
+                            showTxt: true
+                          }],
+                      }
+                    },
+                    methods:{
+                      shareSuc() {
+                        alert("分享成功的回调在这里");
+                      },
+                      shareFail() {
+                        alert("分享失败的回调在这里");
+                      },
+                      change() {
+                        this.configData.title = "测试修改分享参数";
+                        this.configData.extra = "test=2";
+                        alert("修改成功");
+                      }
+                    }
+                  }
+                <\/script>
         `,
         tableInfo: {
           attributes: [
@@ -115,7 +130,22 @@ export default {
             {
               propName: "shareData",
               explain:
-                "定制分享类型，传入需分享的数组（仅限外部分享，客户端不提供内部分享的定制）"
+                "定制分享类型，传入需分享的数组（仅限外部分享，客户端不提供内部分享的定制），传入一个数组，内含分享对象[{type:分享类型，title：icon下的文案，showTxt：是否显示文案Boolean},...]，类型可选值为（feed,pm,clan,wx,qq,qzone,redactor,system）",
+              type: "Array",
+              default: "-",
+              choose: "-"
+            }
+          ],
+          events: [
+            {
+              eventsName: "shareSuc",
+              explain: "分享成功的回调",
+              default: "-"
+            },
+            {
+              eventsName: "shareFail",
+              explain: "分享失败的回调",
+              default: "-"
             }
           ]
         }
@@ -124,13 +154,15 @@ export default {
   },
   methods: {
     shareSuc() {
-      // alert("分享成功的回调在这里");
+      alert("分享成功的回调在这里");
     },
     shareFail() {
-      // alert("分享失败的回调在这里");
+      alert("分享失败的回调在这里");
     },
     change() {
+      this.configData.title = "测试修改分享参数";
       this.configData.extra = "test=2";
+      alert("修改成功");
     }
   },
   components: { shareCpl, Example }
@@ -142,7 +174,6 @@ export default {
   $base: "./images/";
 
   .share-wrap {
-    margin-bottom: re(65);
     .share-icon {
       margin: 0 re(12);
       line-height: re(132);
@@ -166,7 +197,8 @@ export default {
   button {
     border: re(1) solid black;
     font-size: re(18);
-    padding: re(20);
+    padding: re(10) re(20);
+    margin-top: re(20);
   }
 </style>
 

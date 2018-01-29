@@ -3,6 +3,7 @@
         <div class="info">
             <div class='title'>{{info.title}}</div>
             <div class="author">{{info.author}}</div>
+            <div class="tip">{{info.tip}}</div>
         </div>
         <slot></slot>
         <div class="btn-showCode"

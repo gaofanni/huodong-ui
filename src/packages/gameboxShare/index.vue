@@ -7,8 +7,6 @@
         @click="iosShare(item.type)">
         <slot :name="item.type"></slot>
       </div>
-      <!-- <div class="title"
-                v-if="item.showTxt">{{item.title}}</div> -->
     </li>
   </ul>
 </template>
@@ -19,10 +17,27 @@ import help from "../../common/tools/help";
 export default {
   name: "share",
   props: ["data", "configData"],
-  data() {
-    return {};
-  },
   created() {},
+  watch: {
+    configData: {
+      handler: function(val) {
+        window.gameBoxFn.setConfig({
+          config: {
+            shareTitle: val.title,
+            shareIcon: val.iconUrl,
+            shareUrl: val.redirectUrl,
+            shareContent: val.content,
+            extra: {
+              custom: {
+                activityUri: val.extra
+              }
+            }
+          }
+        });
+      },
+      deep: true
+    }
+  },
   mounted() {
     if (help.env().isGamebox && help.env().isAndroid) {
       this.initShare();

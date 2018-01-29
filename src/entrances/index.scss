@@ -142,6 +142,7 @@ pre{
         font-size: re(12);
         padding:re(10) re(40);
         text-align: left;
+        color:#646464;
     }
 }
 //标题样式
@@ -157,6 +158,10 @@ pre{
     }
     .author{
         font-size: re(16);
+    }
+    .tip{
+        font-size: re(14);
+        color:#999;
     }
 }
 //表格样式
