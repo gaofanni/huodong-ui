@@ -11,7 +11,8 @@ const router = new Router({
         { path: '/lotto', component: () => import('../examples/lotto/index'), name: 'lotto' },
         { path: '/scrollNotice', component: () => import('../examples/scrollNotice/index'), name: 'scrollNotice' },
         { path: '/barrage', component: () => import('../examples/barrage/index'), name: 'barrage' },
-        { path: '/gameboxShare', component: () => import('../examples/gameboxShare/index'), name: 'gameboxShare' }
+        { path: '/gameboxShare', component: () => import('../examples/gameboxShare/index'), name: 'gameboxShare' },
+        { path: '/guessPic', component: () => import('../examples/guessPic/index'), name: 'guessPic' },
     ]
 });
 

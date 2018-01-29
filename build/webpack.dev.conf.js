@@ -29,7 +29,7 @@ module.exports = merge(baseWebpackConfig, {
   ]
 })
 
-for(var i in config.template) {
+for (var i in config.template) {
   module.exports.plugins.push(
     new HtmlWebpackPlugin(config.template[i])
   )

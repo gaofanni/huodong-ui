@@ -12,6 +12,7 @@
         <router-link :to="{name:'scrollNotice'}">scrollNotice 跑马灯</router-link>
         <router-link :to="{name:'barrage'}">barrage 弹幕</router-link>
         <router-link :to="{name:'gameboxShare'}">gameboxShare 游戏盒分享</router-link>
+        <router-link :to="{name:'guessPic'}">guessPic 猜图</router-link>
       </aside>
       <section class='container'>
         <div class="inner">
