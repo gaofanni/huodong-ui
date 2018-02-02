@@ -1,32 +1,32 @@
 <template>
-    <div class="guessPic">
-        <Example :info="exampleInfo.info"
-            :tableInfo="exampleInfo.tableInfo"
-            :code="exampleInfo.code">
-            <GuessPic class="guess-pic"
-                @chooseOver="chooseOver"
-                @askForHint="askForHint"
-                chooseClassName="isChoose"
-                hintClassName="isHint"
-                :hintData='hintData'
-                :gameData="cur">
-                <!-- 图片 -->
-                <div class="guess-pic_img"
-                    :style="`background-image:url('${cur.img}')`"
-                    slot="img"></div>
-                <div class="title"
-                    slot="title">{{cur.title}}</div>
-                <!-- 定义填入框的样式 -->
-                <li class="guess-pic_choose"
-                    slot="choose"></li>
-                <!-- 定义选择框样式 -->
-                <li class="guess-pic_answer"
-                    slot="answer"></li>
-                <div class="guess-pic_hint-btn"
-                    slot="hintBtn">提示</div>
-            </GuessPic>
-        </Example>
-    </div>
+  <div class="guessPic">
+    <Example :info="exampleInfo.info"
+      :tableInfo="exampleInfo.tableInfo"
+      :code="exampleInfo.code">
+      <GuessPic class="guess-pic"
+        @chooseOver="chooseOver"
+        @askForHint="askForHint"
+        chooseClassName="isChoose"
+        hintClassName="isHint"
+        :hintData='hintData'
+        :gameData="cur">
+        <!-- 图片 -->
+        <div class="guess-pic_img"
+          :style="`background-image:url('${cur.img}')`"
+          slot="img"></div>
+        <div class="title"
+          slot="title">{{cur.title}}</div>
+        <!-- 定义填入框的样式 -->
+        <li class="guess-pic_choose"
+          slot="choose"></li>
+        <!-- 定义选择框样式 -->
+        <li class="guess-pic_answer"
+          slot="answer"></li>
+        <div class="guess-pic_hint-btn"
+          slot="hintBtn">提示</div>
+      </GuessPic>
+    </Example>
+  </div>
 </template>
 <script>
 import Example from "../../components/example/index";
@@ -42,7 +42,104 @@ export default {
           tip:
             "选字猜图游戏，可选择是否提示，提示内容由外部传入，组件内进行显示处理，选择结束后，外部可接收内部传出的选择结果进行对错的判断。（提示类型为从首个开始提示，非从下一个空格处开始提示）"
         },
-        code: "",
+        code: `
+        <GuessPic class="guess-pic"
+                @chooseOver="chooseOver"
+                @askForHint="askForHint"
+                chooseClassName="isChoose"
+                hintClassName="isHint"
+                :hintData='hintData'
+                :gameData="cur">
+                <!-- 图片 -->
+                <div class="guess-pic_img"
+                    :style="'background-image:url('+cur.img+')'"
+                    slot="img"></div>
+                <div class="title"
+                    slot="title">{{cur.title}}</div>
+                <!-- 定义填入框的样式 -->
+                <li class="guess-pic_choose"
+                    slot="choose"></li>
+                <!-- 定义选择框样式 -->
+                <li class="guess-pic_answer"
+                    slot="answer"></li>
+                <div class="guess-pic_hint-btn"
+                    slot="hintBtn">提示</div>
+            </GuessPic>
+            <script>
+              export default {
+                data(){
+                  return {
+                        cur: {},
+                        total: [
+                          {
+                            id: "3",
+                            title: "图中的游戏画面出自哪款游戏？",
+                            type: "1",
+                            img: "http://f1.img4399.com/m~cp/502018/01/25/11_6s=DNe.580x326.jpg",
+                            game_id: "89051",
+                            no: "1",
+                            level: "1",
+                            sort: "2",
+                            isOnline: "1",
+                            add_time: "1516876948",
+                            no_id: "0",
+                            answer: [
+                              { id: "19", answer: "切", qid: "3" },
+                              { id: "20", answer: "西", qid: "3" },
+                              { id: "21", answer: "水", qid: "3" },
+                              { id: "141", answer: "切", qid: "3" },
+                              { id: "344", answer: "水", qid: "3" },
+                              { id: "345", answer: "果", qid: "3" },
+                              { id: "357", answer: "要", qid: "3" },
+                              { id: "358", answer: "回", qid: "3" },
+                              { id: "359", answer: "家", qid: "3" },
+                              { id: "360", answer: "啊", qid: "3" },
+                              { id: "361", answer: "啊", qid: "3" },
+                              { id: "362", answer: "啊", qid: "3" },
+                              { id: "363", answer: "啊", qid: "3" },
+                              { id: "364", answer: "啊", qid: "3" },
+                              { id: "365", answer: "啊", qid: "3" },
+                              { id: "366", answer: "啊", qid: "3" },
+                              { id: "367", answer: "啊", qid: "3" },
+                              { id: "368", answer: "啊", qid: "3" },
+                              { id: "369", answer: "啊", qid: "3" },
+                              { id: "370", answer: "啊", qid: "3" },
+                              { id: "371", answer: "啊", qid: "3" }
+                            ],
+                            answerNum: 6
+                          },
+                          ...很多题
+                        ],
+                        curIndex: 0,
+                        hintTime: 0,
+                        hintData: {}
+                        }
+                      }
+                    },
+                    mounted() {
+                      this.cur = this.total[this.curIndex];
+                    },
+                    methods: {
+                      chooseOver() {
+                        alert("选择完毕，选择的答案已打印在控制台");
+                        console.log(arguments);
+                        if (this.curIndex < this.total.length - 1) {
+                          this.curIndex++;
+                        } else {
+                          this.curIndex = 0;
+                        }
+                        this.cur = this.total[this.curIndex];
+                        this.hintTime = 0;
+                      },
+                      askForHint(hintArr) {
+                        /* 点击提示的回调 */
+                        // 设置提示内容
+                        this.hintData = this.total[this.curIndex].answer[this.hintTime];
+                        this.hintTime++;
+                      }
+                    }
+            <\/script>
+        `,
         tableInfo: {
           attributes: [
             {
@@ -318,52 +415,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @import "../../common/sass/global";
-    .guess-pic {
-      .guess-pic_answer-wrap {
-        text-align: left;
+  @import "../../common/sass/global";
+  .guess-pic {
+    .guess-pic_answer-wrap {
+      text-align: left;
+    }
+    .guess-pic_img {
+      @include whr(580,326);
+      border: re(6) solid #c0f5ff;
+      display: inline-block;
+      @include placeHold(580,326);
+      background-size: 100% 100%;
+    }
+    .title {
+      font-size: re(20);
+    }
+    .guess-pic_choose,
+    .guess-pic_answer {
+      @include whr(40,40);
+      background: lightgrey;
+      margin: re(10) re(20);
+      display: inline-block;
+      font-size: re(24);
+      color: #c0f5ff;
+      position: relative;
+      line-height: re(40);
+      text-align: center;
+      color: black;
+      vertical-align: middle;
+      &.isChoose {
+        color: red;
+        font-size: 0;
       }
-      .guess-pic_img {
-        @include whr(580,326);
-        border: re(6) solid #c0f5ff;
-        display: inline-block;
-        @include placeHold(580,326);
-        background-size: 100% 100%;
-      }
-      .title {
-        font-size: re(20);
-      }
-      .guess-pic_choose,
-      .guess-pic_answer {
-        @include whr(40,40);
-        background: lightgrey;
-        margin: re(10) re(20);
-        display: inline-block;
-        font-size: re(24);
-        color: #c0f5ff;
-        position: relative;
-        line-height: re(40);
-        text-align: center;
-        color: black;
-        vertical-align: middle;
-        &.isChoose {
-          color: red;
-          font-size: 0;
-        }
-        &.isHint {
-          color: red;
-        }
-      }
-      .guess-pic_hint-btn {
-        padding: re(10) re(20);
-        display: inline-block;
-        position: relative;
-        margin-top: re(10);
-        background: lightgrey;
-        font-size: re(20);
-        line-height: 1;
+      &.isHint {
+        color: red;
       }
     }
+    .guess-pic_hint-btn {
+      padding: re(10) re(20);
+      display: inline-block;
+      position: relative;
+      margin-top: re(10);
+      background: lightgrey;
+      font-size: re(20);
+      line-height: 1;
+    }
+  }
 </style>
 
 

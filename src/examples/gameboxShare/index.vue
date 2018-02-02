@@ -151,7 +151,8 @@ export default {
           slot: [
             {
               slotName: "wx||qzone||qq",
-              explain: "插入定制分享类型，"
+              explain:
+                "插入定制的分享类型，绑定点击类型，用于插入定义图标，title等"
             }
           ]
         }
