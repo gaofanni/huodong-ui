@@ -140,12 +140,18 @@ export default {
             {
               eventsName: "shareSuc",
               explain: "分享成功的回调",
-              default: "-"
+              arguments: "-"
             },
             {
               eventsName: "shareFail",
               explain: "分享失败的回调",
-              default: "-"
+              arguments: "-"
+            }
+          ],
+          slot: [
+            {
+              slotName: "wx||qzone||qq",
+              explain: "插入定制分享类型，"
             }
           ]
         }
