@@ -49,7 +49,6 @@ export default class moveTo {
                 if (timeElapsed < this.duration) {
                     this.currentPos = this.initialScrollTop - val;
                     this.scroller.scrollTop = this.currentPos;
-                    console.log(this.currentPos)
                     this.requestAnimationFrame(loop);
                 } else {
                     this.callback();
