@@ -4,172 +4,118 @@
       :code="exampleInfo.code"
       :tips="exampleInfo.tips"
       :tableInfo="exampleInfo.tableInfo">
+      <div class="height">
+
+        👇<br>
+        👇<br>
+        👇<br>
+        👇<br>
+        👇<br>
+      </div>
       <backTop 
-       :parent = '`.wrap`'>
+       :parent = '`html`'
+       :duration='700'
+       @end='handleEnd'
+       >
         <div class="backtop"     
         ></div>
       </backTop>
-      <div class="stop"
-        @click="stopBarrage">{{isStopBarrage?'开始弹幕':'暂停弹幕'}}</div>
     </Example>
   </div>
 </template>
 
 <script>
-  import backTop from "../../packages/backTop/index";
-  import Example from "../../components/example/index";
-  export default {
-    data() {
-      return {
-        exampleInfo: {
-          info: { title: "弹幕", author: "gaofanni" },
-          code: `
-                                                      <Barrage :data='barrageData'
-                                                        :isStopBarrage="isStopBarrage"
-                                                        class='barrage-content'>
-                                                        <li></li>
-                                                      </Barrage>
-
-                                                            <script>
-                                                              export default {
-                                                                data(){
-                                                                  return {
-                                                                    barrageData: [
-                                                                      "游戏直播与视频分享神器",
-                                                                      "与主播零距离互动大量高端游戏赛事大量高端游戏赛事",
-                                                                      "大量高端游戏赛事",
-                                                                      "游戏直播与视频分享神器大量高端游戏",
-                                                                      "与主播零距离互动大量高端游戏赛事大量高端游戏赛事大量高端游戏",
-                                                                      "大量高端游戏赛事游戏赛事大量高端游戏",
-                                                                      "游戏直播与视频分享神器",
-                                                                      "与主播零距离互动大量高端游戏赛事大量高端",
-                                                                      "大量高端游戏赛事游戏赛事",
-                                                                      "游戏直播与视频分享神器",
-                                                                      "与主播零距离互动大量高端游戏赛事大量高端游戏赛事大量高端游戏",
-                                                                      "大量高端"
-                                                                    ]
-                                                                  }
-                                                                },
-                                                                methods: {
-                                                                  //暂停弹幕、开始弹幕
-                                                                  stopBarrage() {
-                                                                    this.isStopBarrage = !this.isStopBarrage;
-                                                                  }
-                                                                },
-                                                              }
-                                                            <\/script>
-                                                            <style lang="scss" scoped>
-                                                                .barrage-content {
-                                                                  position: relative;
-                                                                  display: inline-block;
-                                                                  width: re(520);
-                                                                  height: re(176);
-                                                                  overflow: hidden;
-                                                                  border: 1px solid #999;
-                                                                  li {
-                                                                    display: inline-block;
-                                                                    position: absolute;
-                                                                    left: re(520);
-                                                                    padding: 0 re(40);
-                                                                    height: re(47);
-                                                                    border: 1px solid #bf8555;
-                                                                    line-height: re(47);
-                                                                    white-space: nowrap;
-                                                                    background-color: #2d1711;
-                                                                    color: #bf8555;
-                                                                    &.txt-0 {
-                                                                      top: 0;
-                                                                    }
-                                                                    &.txt-1 {
-                                                                      top: re(66);
-                                                                    }
-                                                                    &.txt-2 {
-                                                                      top: re(129);
-                                                                    }
-                                                                  }
-                                                                }
-                                                            </style>
-                                                            
-                                                      `,
-          tips: `在组件内定制样式，<span class="hl">需要插入一条li写入默认样式</span>，且每一条的纵向高度需定制，<span class='hl'>className需以txt-开头</span>，如第一行的为txt-0，依次类推`,
-          tableInfo: {
-            attributes: [
-              {
-                propName: `data`,
-                explain: `弹幕内容`,
-                type: `Array`,
-                default: `-`,
-                choose: `-`
-              },
-              {
-                propName: `isStopBarrage`,
-                explain: `是否暂停弹幕，为true后，会走完当前已经添加的弹幕，不再增加弹幕`,
-                type: `Boolean`,
-                default: `false`,
-                choose: `true/false`
-              },
-              {
-                propName: `MAX`,
-                explain: `位置上一共有多少条的位置`,
-                type: `Number`,
-                default: `3`,
-                choose: `-`
-              },
-              {
-                propName: `intervalTime`,
-                explain: `每一条弹幕插入的间隔时间，与前一条的宽度正相关`,
-                type: `Number`,
-                default: `50`,
-                choose: `-`
-              },
-              {
-                propName: `speed`,
-                explain: `每一条弹幕的移动速度，越大越快`,
-                type: `Number`,
-                default: `200`,
-                choose: `-`
-              }
-            ]
-          }
+import backTop from "../../packages/backTop/index";
+import Example from "../../components/example/index";
+export default {
+  data() {
+    return {
+      exampleInfo: {
+        info: {
+          title: "回到顶部",
+          author: "fupengcheng"
         },
-        isStopBarrage: false,
-        barrageData: [
-          "游戏直播与视频分享神器",
-          "与主播零距离互动大量高端游戏赛事大量高端游戏赛事",
-          "大量高端游戏赛事",
-          "游戏直播与视频分享神器大量高端游戏",
-          "与主播零距离互动大量高端游戏赛事大量高端游戏赛事大量高端游戏",
-          "大量高端游戏赛事游戏赛事大量高端游戏",
-          "游戏直播与视频分享神器",
-          "与主播零距离互动大量高端游戏赛事大量高端",
-          "大量高端游戏赛事游戏赛事",
-          "游戏直播与视频分享神器",
-          "与主播零距离互动大量高端游戏赛事大量高端游戏赛事大量高端游戏",
-          "大量高端"
-        ]
-      };
-    },
-    methods: {
-      stopBarrage() {
-        this.isStopBarrage = !this.isStopBarrage;
+        code: `
+        <backTop 
+          :parent = '"html"'
+          :duration='700'
+          :easing = 'easingFunction'
+          @end='handleEnd'
+          >
+            <div class="backtop"     
+            ></div>
+        </backTop>
+            <style lang="scss" scoped>
+                  .backtop {
+                    position: fixed;
+                    bottom: re(30);
+                    right: re(30);
+                    width: re(50);
+                    height: re(50);
+                    background-color: #000;
+                    border-radius: 50%;
+                    cursor: pointer;
+                  }
+            </style>
+          `,
+        tips: `在组件插槽中放入回到顶部按钮的样式，需要传入真实滚动的容器选择器。可配置时间、动画曲线，到达顶部后会提供回调函数`,
+        tableInfo: {
+          attributes: [
+            {
+              propName: `parent`,
+              explain: `滚动的容器`,
+              type: `string`,
+              default: `html`,
+              choose: `-`
+            },
+            {
+              propName: `duration`,
+              explain: `动画持续时间`,
+              type: `number`,
+              default: `700`,
+              choose: `-`
+            },
+            {
+              propName: `easing`,
+              explain: `缓动函数`,
+              type: `function`,
+              default: `easeOutQuart(t, b, c, d) {
+                              t /= d;
+                              t--;
+                              return -c * (t * t * t * t - 1) + b;
+                          }`,
+              choose: `-`
+            }
+          ]
+        }
       }
-    },
-    components: { backTop, Example }
-  };
+    };
+  },
+  methods: {
+    handleEnd() {
+      alert("到达顶部");
+    }
+  },
+  components: { backTop, Example }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../../common/sass/global";
-  .backtop {
-    position: fixed;
-    bottom: re(30);
-    right: re(30);
-    width: re(50);
-    height: re(50);
-    background-color: #000;
-    border-radius: 50%;
-    cursor: pointer;
-  }
+@import "../../common/sass/global";
+.height {
+  height: re(500);
+}
+.backtop {
+  position: fixed;
+  bottom: re(30);
+  right: re(30);
+  width: re(50);
+  height: re(50);
+  background-color: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 400;
+}
 </style>
 
 
