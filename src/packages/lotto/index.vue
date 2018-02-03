@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import help from "../../common/tools/help";
+import help from "../tools/help";
 export default {
   name: "lotto",
   props: {

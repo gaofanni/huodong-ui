@@ -1,13 +1,15 @@
 <template>
   <transition name='fade'>
-  <div ref='backTop' v-show='itemShow'>
+    <div ref='backTop'
+      v-show='itemShow'>
       <slot></slot>
-  </div>
+    </div>
   </transition>
 </template>
 
 <script>
 import moveTo from "./moveTo.js";
+
 export default {
   name: "backTop",
   data() {
@@ -47,13 +49,13 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.2s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
 </style>
 

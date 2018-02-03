@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import backTop from "../../packages/backTop/index";
+import backTop from "../../packages/backTop/index.vue";
 import Example from "../../components/example/index";
 export default {
   data() {

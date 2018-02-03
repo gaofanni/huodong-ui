@@ -1,11 +1,11 @@
 <template>
-    <section class="btn-upload"
-        ref="image">
-        <slot name="background" />
-        <input type="file"
-            ref="input"
-            @change="uploadPhoto">
-    </section>
+  <section class="btn-upload"
+    ref="image">
+    <slot name="background" />
+    <input type="file"
+      ref="input"
+      @change="uploadPhoto">
+  </section>
 </template>
 
 <script>
@@ -74,28 +74,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @import "../../common/sass/global";
-    .btn-upload {
-      position: relative;
-      display: inline-block;
-      overflow: hidden;
-      .innerImg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        pointer-events: none;
-      }
-      input {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        opacity: 0;
-      }
+  .btn-upload {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    .innerImg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      pointer-events: none;
     }
+    input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+  }
 </style>
 
 
