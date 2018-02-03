@@ -26,7 +26,7 @@
         <th>说明</th>
         <th>类型</th>
         <th>默认值</th>
-        <th>可选值</th>
+        <th>required</th>
       </thead>
       <tbody>
         <tr v-for="body in tableInfo.attributes">
@@ -34,7 +34,7 @@
           <td>{{body.explain}}</td>
           <td>{{body.type}}</td>
           <td>{{body.default}}</td>
-          <td>{{body.choose}}</td>
+          <td>{{body.required}}</td>
         </tr>
       </tbody>
     </table>
@@ -79,7 +79,9 @@ export default {
       default: {}
     },
     code: {
-      default: {}
+      default() {
+        return "";
+      }
     },
     tips: {
       default: ""

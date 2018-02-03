@@ -194,7 +194,7 @@ export default {
                 "本题的游戏数据，必须包含{answer:[备选项的数组],answerNum:答案框的个数}",
               type: "Object",
               default: "-",
-              choose: "-"
+              required: "true"
             },
             {
               propName: "hintData",
@@ -202,21 +202,21 @@ export default {
                 "若有提示需求，可在'askForHint'内设置hintData，必须与gameData的answer数组内单一对象格式一致。若不需提示按钮，可不传。（注意：内部是监听hintData的变动进行提示，请不要在非askForHint回调内设置），",
               type: "Object",
               default: "-",
-              choose: "-"
+              required: "false"
             },
             {
               propName: "chooseClassName",
               explain: "用于定义选项被选择后的样式名",
               type: "String",
               default: "-",
-              choose: "-"
+              required: "false"
             },
             {
               propName: "hintClassName",
               explain: "用于提示后答案框代表被提示后的样式名",
               type: "String",
               default: "-",
-              choose: "-"
+              required: "false"
             }
           ],
           events: [

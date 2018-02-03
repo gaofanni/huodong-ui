@@ -104,35 +104,35 @@ export default {
               explain: `弹幕内容`,
               type: `Array`,
               default: `-`,
-              choose: `-`
+              required: `true`
             },
             {
               propName: `isStopBarrage`,
               explain: `是否暂停弹幕，为true后，会走完当前已经添加的弹幕，不再增加弹幕`,
               type: `Boolean`,
               default: `false`,
-              choose: `true/false`
+              required: `false`
             },
             {
               propName: `MAX`,
               explain: `位置上一共有多少条的位置`,
               type: `Number`,
               default: `3`,
-              choose: `-`
+              required: `true`
             },
             {
               propName: `intervalTime`,
               explain: `每一条弹幕插入的间隔时间，与前一条的宽度正相关`,
               type: `Number`,
               default: `50`,
-              choose: `-`
+              required: `false`
             },
             {
               propName: `speed`,
               explain: `每一条弹幕的移动速度，越大越快`,
               type: `Number`,
               default: `200`,
-              choose: `-`
+              required: `false`
             }
           ]
         }

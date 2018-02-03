@@ -81,7 +81,7 @@ export default {
                 "配置雷达图样式，必须包含{count：几边(number)，colorPolygon：线条颜色，colorText：文字颜色，colorFill：填充颜色，colorFillCircle：圆的填充色}",
               type: "Object",
               default: "-",
-              choose: "-"
+              required: "true"
             },
             {
               propName: "data",
@@ -89,7 +89,7 @@ export default {
                 "配置雷达图每个端点显示的文字与数据，length必须与opt.count对应，数组内数据结构为[代表文字，数值(0-100)]",
               type: "Array",
               default: "-",
-              choose: "-"
+              required: "true"
             }
           ]
         }

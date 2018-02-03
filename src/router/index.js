@@ -14,6 +14,7 @@ const router = new Router({
         { path: '/gameboxShare', component: () => import('../examples/gameboxShare/index'), name: 'gameboxShare' },
         { path: '/guessPic', component: () => import('../examples/guessPic/index'), name: 'guessPic' },
         { path: '/backTop', component: () => import('../examples/backTop/index'), name: 'backTop' },
+        { path: '/uploadImg', component: () => import('../examples/uploadImg/index'), name: 'uploadImg' },
     ]
 });
 

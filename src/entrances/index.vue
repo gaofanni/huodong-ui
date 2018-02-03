@@ -14,11 +14,11 @@
         <router-link :to="{name:'gameboxShare'}">gameboxShare 游戏盒分享</router-link>
         <router-link :to="{name:'guessPic'}">guessPic 猜图</router-link>
         <router-link :to="{name:'backTop'}">backTop 回到顶部</router-link>
+        <router-link :to="{name:'uploadImg'}">uploadImg 上传图片</router-link>
       </aside>
       <section class='container'>
         <div class="inner">
           <router-view></router-view>
-
         </div>
       </section>
     </section>
@@ -26,18 +26,18 @@
 </template>
 
 <script>
-  export default {
-    name: "root",
-    data() {
-      return {
-        isShowAside: false
-      };
-    },
-    mounted() {},
-    computed: {},
-    methods: {},
-    components: {}
-  };
+export default {
+  name: "root",
+  data() {
+    return {
+      isShowAside: false
+    };
+  },
+  mounted() {},
+  computed: {},
+  methods: {},
+  components: {}
+};
 </script>
 
 <style lang="scss">
