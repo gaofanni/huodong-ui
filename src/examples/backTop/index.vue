@@ -63,25 +63,28 @@ export default {
               explain: `滚动的容器`,
               type: `string`,
               default: `html`,
-              choose: `-`
+              required: `false`
             },
             {
               propName: `duration`,
               explain: `动画持续时间`,
               type: `number`,
               default: `700`,
-              choose: `-`
+              required: `false`
             },
             {
               propName: `easing`,
               explain: `缓动函数`,
               type: `function`,
-              default: `easeOutQuart(t, b, c, d) {
-                              t /= d;
-                              t--;
-                              return -c * (t * t * t * t - 1) + b;
-                          }`,
-              choose: `-`
+              default: `easeOutQuart`,
+              required: `false`
+            }
+          ],
+          events: [
+            {
+              eventsName: "end",
+              explain: "回到顶部的回调",
+              arguments: "-"
             }
           ]
         }
