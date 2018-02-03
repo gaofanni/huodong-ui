@@ -120,9 +120,9 @@ export default {
                       this.cur = this.total[this.curIndex];
                     },
                     methods: {
-                      chooseOver() {
+                      chooseOver(chooseArr) {
                         alert("选择完毕，选择的答案已打印在控制台");
-                        console.log(arguments);
+                        console.log(chooseArr);
                         if (this.curIndex < this.total.length - 1) {
                           this.curIndex++;
                         } else {
@@ -134,6 +134,7 @@ export default {
                       askForHint(hintArr) {
                         /* 点击提示的回调 */
                         // 设置提示内容
+                        //hintArr为回调传来的已提示数组
                         this.hintData = this.total[this.curIndex].answer[this.hintTime];
                         this.hintTime++;
                       }
@@ -393,9 +394,9 @@ export default {
     this.cur = this.total[this.curIndex];
   },
   methods: {
-    chooseOver() {
+    chooseOver(chooseArr) {
       alert("选择完毕，选择的答案已打印在控制台");
-      console.log(arguments);
+      console.log(chooseArr);
       if (this.curIndex < this.total.length - 1) {
         this.curIndex++;
       } else {

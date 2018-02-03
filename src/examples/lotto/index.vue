@@ -4,7 +4,7 @@
       :code="exampleInfo.code"
       :tableInfo='exampleInfo.tableInfo'>
       <Lotto :get="lottoResult"
-        :rewardList="rewardList"
+        :rewardLen="rewardList.length"
         :num='scrollNum'
         :isGameBegin='gameBegin'
         @checkGamePermission="checkGamePermission"
@@ -35,7 +35,12 @@ export default {
   data() {
     return {
       exampleInfo: {
-        info: { title: "抽奖大乐透", author: "gaofanni" },
+        info: {
+          title: "抽奖大乐透",
+          author: "gaofanni",
+          tip:
+            "初始状态滚动展示抽奖结果，点击抽奖由组件外部传入抽奖结果，组件内部进行处理展示，抽奖结束后，继续滚动展示"
+        },
         code: `
                 <Lotto :get="lottoResult"
                     :rewardList="rewardList"
