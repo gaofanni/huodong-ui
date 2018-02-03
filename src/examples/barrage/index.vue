@@ -22,13 +22,19 @@ export default {
   data() {
     return {
       exampleInfo: {
-        info: { title: "弹幕", author: "gaofanni" },
+        info: {
+          title: "弹幕",
+          author: "gaofanni",
+          tip:
+            "使用transition完成动画，保证移动的流畅程度，但暂停弹幕无法直接停止移动，需要等当前已增加弹幕走完"
+        },
         code: `
-              <Barrage :data='barrageData'
-                :isStopBarrage="isStopBarrage"
-                class='barrage-content'>
-                <li></li>
-              </Barrage>
+                    <Barrage :data='barrageData'
+                      :isStopBarrage="isStopBarrage"
+                      class='barrage-content'>
+                      <li></li>
+                    </Barrage>
+                    <div class="stop" @click="stopBarrage">{{isStopBarrage?'开始弹幕':'暂停弹幕'}}</div>
 
                     <script>
                       export default {

@@ -51,20 +51,16 @@ export default {
                 :hintData='hintData'
                 :gameData="cur">
                 <!-- 图片 -->
-                <div class="guess-pic_img"
-                    :style="'background-image:url('+cur.img+')'"
-                    slot="img"></div>
-                <div class="title"
-                    slot="title">{{cur.title}}</div>
+                <div class="guess-pic_img" :style="'background-image:url('+cur.img+')'" slot="img"></div>
+                <!-- 题目描述，问题 -->
+                <div class="title" slot="title">{{cur.title}}</div>
                 <!-- 定义填入框的样式 -->
-                <li class="guess-pic_choose"
-                    slot="choose"></li>
+                <li class="guess-pic_choose" slot="choose"></li>
                 <!-- 定义选择框样式 -->
-                <li class="guess-pic_answer"
-                    slot="answer"></li>
-                <div class="guess-pic_hint-btn"
-                    slot="hintBtn">提示</div>
+                <li class="guess-pic_answer" slot="answer"></li>
+                <div class="guess-pic_hint-btn" slot="hintBtn">提示</div>
             </GuessPic>
+
             <script>
               export default {
                 data(){
@@ -140,6 +136,55 @@ export default {
                       }
                     }
             <\/script>
+
+            <style lang="scss" scoped>
+                @import "../../common/sass/global";
+                .guess-pic {
+                  .guess-pic_answer-wrap {
+                    text-align: left;
+                  }
+                  .guess-pic_img {
+                    @include whr(580,326);
+                    border: re(6) solid #c0f5ff;
+                    display: inline-block;
+                    @include placeHold(580,326);
+                    background-size: 100% 100%;
+                  }
+                  .title {
+                    font-size: re(20);
+                  }
+                  .guess-pic_choose,
+                  .guess-pic_answer {
+                    @include whr(40,40);
+                    background: lightgrey;
+                    margin: re(10) re(20);
+                    display: inline-block;
+                    font-size: re(24);
+                    color: #c0f5ff;
+                    position: relative;
+                    line-height: re(40);
+                    text-align: center;
+                    color: black;
+                    vertical-align: middle;
+                    &.isChoose {
+                      color: red;
+                      font-size: 0;
+                    }
+                    &.isHint {
+                      color: red;
+                    }
+                  }
+                  .guess-pic_hint-btn {
+                    padding: re(10) re(20);
+                    display: inline-block;
+                    position: relative;
+                    margin-top: re(10);
+                    background: lightgrey;
+                    font-size: re(20);
+                    line-height: 1;
+                  }
+                }
+              </style>
         `,
         tableInfo: {
           attributes: [

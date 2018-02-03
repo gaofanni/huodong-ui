@@ -112,6 +112,7 @@ export default {
                       change() {
                         this.configData.title = "测试修改分享参数";
                         this.configData.extra = "test=2";
+                        this.configData.redirectUrl = "www.taobao.com";
                         alert("修改成功");
                       }
                     }
@@ -169,6 +170,7 @@ export default {
     change() {
       this.configData.title = "测试修改分享参数";
       this.configData.extra = "test=2";
+      this.configData.redirectUrl = "www.taobao.com";
       alert("修改成功");
     }
   },

@@ -107,9 +107,6 @@ export default {
 <style lang="scss" scoped>
   li {
     display: inline-block;
-    span {
-      display: inline-block;
-    }
   }
 </style>
 
