@@ -37,10 +37,8 @@ export default {
           :parent = '"html"'
           :duration='700'
           :easing = 'easingFunction'
-          @end='handleEnd'
-          >
-            <div class="backtop"     
-            ></div>
+          @end='handleEnd'>
+            <div class="backtop"></div>
         </backTop>
             <style lang="scss" scoped>
                   .backtop {
