@@ -1,52 +1,68 @@
+/**
+ * 回到顶部的实现逻辑
+ */
 export default class moveTo {
-    constructor(target, parent = 'body') {
+    constructor({ target, parent = 'html', duration = 700, easing = this.easeOutQuart, callback = () => { } }) {
         if (!target) {
             return new Error('缺少参数target')
         }
+
         this.parent = parent;
         this.target = target;
         this.scroller = document.querySelector(this.parent);
-        this.stop = false;
+        this.duration = duration;
+        this.easing = easing;
+        this.callback = callback;
+
+
+        this.currentPos = '';
+        this.initialScrollTop = '';
+
         this.init();
     }
+    requestAnimationFrame(loop) {
+        return window.requestAnimationFrame(loop) ||
+            window.webkitRequestAnimationFrame(loop) ||
+            window.mozRequestAnimationFrame(loop) ||
+            window.setTimeout(loop, 6000 / 60);
+    }
     init() {
-        let bindFn = (e) => {
-            let scrollTop = this.scroller.scrollTop;
-            console.log(this.scroller)
-            console.log(scrollTop)
+        const bindFn = (e) => {
+            //to save the initial offset.
+            this.initialScrollTop = this.scroller.scrollTop;
+            this.currentPos = this.initialScrollTop;
+            let startTime = null;
+
+            //animation loop
+            const loop = (currentTime) => {
+                if (!startTime) {
+                    startTime = currentTime - 1;
+                }
+                //to calculate current timeElapsed
+                const timeElapsed = currentTime - startTime;
+
+                //to calculate currentPosition using easingFunc.
+                const val = this.easing(
+                    timeElapsed, 0, this.initialScrollTop, this.duration
+                );
+                //to stop when the scrolltop and exec callback
+                if (timeElapsed < this.duration) {
+                    this.currentPos = this.initialScrollTop - val;
+                    this.scroller.scrollTop = this.currentPos;
+                    console.log(this.currentPos)
+                    this.requestAnimationFrame(loop);
+                } else {
+                    this.callback();
+                }
+            }
+            const frame = this.requestAnimationFrame(loop);
         }
         this.target.addEventListener('click', bindFn);
-
     }
-    /**
-   * easeOutQuart Easing Function
-   * @param  {number} t - current time
-   * @param  {number} b - start value
-   * @param  {number} c - change in value
-   * @param  {number} d - duration
-   * @return {number} - calculated value
-   */
+    //default easing function
     easeOutQuart(t, b, c, d) {
         t /= d;
         t--;
         return -c * (t * t * t * t - 1) + b;
     }
-    /**
-   * Merge two object
-   *
-   * @param  {object} obj1
-   * @param  {object} obj2
-   * @return {object} merged object
-   */
-    mergeObject(obj1, obj2) {
-        const obj3 = {};
-        Object.keys(obj1).forEach((propertyName) => {
-            obj3[propertyName] = obj1[propertyName];
-        });
-
-        Object.keys(obj2).forEach((propertyName) => {
-            obj3[propertyName] = obj2[propertyName];
-        });
-        return obj3;
-    };
 }
