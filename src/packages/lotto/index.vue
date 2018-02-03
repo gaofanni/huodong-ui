@@ -20,7 +20,7 @@ export default {
         return {};
       }
     }, //获取到的奖励对象，**必须要有一个index对应索引，确定要显示第几个高度**
-    rewardList: {
+    rewardLen: {
       require: true
     }, //渲染显示的奖品对象
     isGameBegin: {
@@ -61,7 +61,7 @@ export default {
     },
     //抽奖
     gameBegin() {
-      this.stop = Math.round(help.getRandom(1, this.rewardList.length - 4));
+      this.stop = Math.round(help.getRandom(1, this.rewardLen - 4));
 
       let time = 0;
       this.getMovingEleToMove((box, n) => {
@@ -130,7 +130,7 @@ export default {
         ) {
           //结束,转两圈
           //没抽中奖，依次展示下一个
-          if (stop < this.rewardList.length) {
+          if (stop < this.rewardLen) {
             this.stop++;
           } else {
             this.stop = 0;

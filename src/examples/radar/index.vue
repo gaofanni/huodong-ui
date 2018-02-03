@@ -2,6 +2,7 @@
     <div class="wrap">
         <Example :info="exampleInfo.info"
             :code="exampleInfo.code"
+            :tips="exampleInfo.tips"
             :tableInfo="exampleInfo.tableInfo">
             <div class="canvas-wrap">
                 <canvasCpl :opt="{
@@ -43,8 +44,9 @@ export default {
     return {
       exampleInfo: {
         info: { title: "雷达图", author: "gaofanni" },
+        tips: "canvas组件的宽高默认是100%的，依靠父级元素撑开宽高",
         code: `
-    <canvasCpl class="canvas" :opt="{
+    <canvasCpl :opt="{
             count: 5,//边数
             colorPolygon: '#e1b073',//填充颜色
             colorText: '#97573e',//文字颜色
