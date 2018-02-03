@@ -33,8 +33,7 @@ export default {
       exampleInfo: {
         info: {
           title: "回到顶部",
-          author: "fupengcheng",
-          tip: `在组件插槽中放入回到顶部按钮的样式，需要传入真实滚动的容器选择器。可配置时间、动画曲线，到达顶部后会提供回调函数`
+          author: "fupengcheng"
         },
         code: `
         <backTop 
