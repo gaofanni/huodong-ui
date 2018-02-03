@@ -147,19 +147,12 @@ export default {
             {
               eventsName: "checkGamePermission",
               explain: "点击'点我转一转'按钮触发的事件",
-              arguments: "--"
+              default: "--"
             },
             {
               eventsName: "lottoOver",
               explain: "抽奖动画结束时触发的事件",
-              arguments: "--"
-            }
-          ],
-          slot: [
-            {
-              slotName: "box${index}",
-              explain:
-                "插入一个抽奖位的插槽，index代表第几个，从1开始，用于定制样式，包括滚动的每一个奖品的图片插入"
+              default: "--"
             }
           ]
         }
