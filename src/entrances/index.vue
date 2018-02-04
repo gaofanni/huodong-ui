@@ -2,7 +2,8 @@
   <div class="root">
     <header>
       <span class="nav"
-        @click="isShowAside=!isShowAside"></span> huodong
+        @click="isShowAside=!isShowAside"></span>
+      huodong-ui
     </header>
     <section class="main">
       <aside style="display:block"
