@@ -6,26 +6,23 @@
       :tableInfo="exampleInfo.tableInfo">
       <div class="height">
 
-        👇<br>
-        👇<br>
-        👇<br>
-        👇<br>
-        👇<br>
+        👇<br> 👇
+        <br> 👇
+        <br> 👇
+        <br> 👇
+        <br>
       </div>
-      <backTop 
-       :parent = '`html`'
-       :duration='700'
-       @end='handleEnd'
-       >
-        <div class="backtop"     
-        ></div>
+      <backTop :parent='`html`'
+        :duration='700'
+        @end='handleEnd'>
+        <div class="backtop"></div>
       </backTop>
     </Example>
   </div>
 </template>
 
 <script>
-import backTop from "../../packages/backTop/index";
+import backTop from "../../packages/backTop/index.vue";
 import Example from "../../components/example/index";
 export default {
   data() {
@@ -102,21 +99,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../common/sass/global";
-.height {
-  height: re(500);
-}
-.backtop {
-  position: fixed;
-  bottom: re(30);
-  right: re(30);
-  width: re(50);
-  height: re(50);
-  background-color: #000;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 400;
-}
+  @import "../../common/sass/global";
+  .height {
+    height: re(1500);
+  }
+  .backtop {
+    position: fixed;
+    bottom: re(30);
+    right: re(30);
+    width: re(50);
+    height: re(50);
+    background-color: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 400;
+  }
 </style>
 
 

@@ -43,7 +43,7 @@ export default {
         },
         code: `
                 <Lotto :get="lottoResult"
-                    :rewardList="rewardList"
+                    :rewardLen="rewardList.length"
                     :num='scrollNum'
                     :isGameBegin='gameBegin'
                     @checkGamePermission="checkGamePermission"
@@ -124,28 +124,28 @@ export default {
               explain: `中奖信息，中奖:{index:中奖的索引},没中奖:{}`,
               type: `Object`,
               default: `{}`,
-              choose: "--"
+              required: "true"
             },
             {
-              propName: "rewardList",
-              explain: `轮播图，用于取得一共多少中奖项`,
-              type: `Array`,
+              propName: "rewardLen",
+              explain: `轮播图选项个数`,
+              type: `Number`,
               default: `{}`,
-              choose: "--"
+              required: "required"
             },
             {
               propName: "isGameBegin",
               explain: `是否可以开始抽奖，用于点击开始按钮的确认`,
               type: `Boolean`,
               default: `-`,
-              choose: "true/false"
+              required: "true"
             },
             {
               propName: "num",
               explain: `抽奖单元个数`,
               type: `Number`,
               default: `3`,
-              choose: "--"
+              required: "false"
             }
           ],
           events: [

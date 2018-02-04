@@ -112,6 +112,7 @@ export default {
                       change() {
                         this.configData.title = "测试修改分享参数";
                         this.configData.extra = "test=2";
+                        this.configData.redirectUrl = "www.taobao.com";
                         alert("修改成功");
                       }
                     }
@@ -125,7 +126,7 @@ export default {
               explain: `分享参数对象{title:'分享标题',content:'分享内容',iconUrl:'分享出去的icon图片',redirectUrl:'定制url',extra:'配置额外带出的参数，用于拼接在url后面'}`,
               type: "Object",
               default: "{}",
-              choose: "-"
+              required: "false"
             },
             {
               propName: "shareData",
@@ -133,7 +134,7 @@ export default {
                 "定制分享类型，传入需分享的数组（仅限外部分享，客户端不提供内部分享的定制），传入一个数组，内含分享对象[{type:分享类型，title：icon下的文案，showTxt：是否显示文案Boolean},...]，类型可选值为（feed,pm,clan,wx,qq,qzone,redactor,system）",
               type: "Array",
               default: "-",
-              choose: "-"
+              required: "true"
             }
           ],
           events: [
@@ -169,6 +170,7 @@ export default {
     change() {
       this.configData.title = "测试修改分享参数";
       this.configData.extra = "test=2";
+      this.configData.redirectUrl = "www.taobao.com";
       alert("修改成功");
     }
   },

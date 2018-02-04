@@ -13,7 +13,7 @@
 
 <script>
 import gameboxshareFn from "./gameBox.share";
-import help from "../../common/tools/help";
+import help from "../tools/help";
 export default {
   name: "share",
   props: ["data", "configData"],
@@ -107,9 +107,6 @@ export default {
 <style lang="scss" scoped>
   li {
     display: inline-block;
-    span {
-      display: inline-block;
-    }
   }
 </style>
 

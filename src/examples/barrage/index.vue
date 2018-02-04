@@ -22,13 +22,19 @@ export default {
   data() {
     return {
       exampleInfo: {
-        info: { title: "弹幕", author: "gaofanni" },
+        info: {
+          title: "弹幕",
+          author: "gaofanni",
+          tip:
+            "使用transition完成动画，保证移动的流畅程度，但暂停弹幕无法直接停止移动，需要等当前已增加弹幕走完"
+        },
         code: `
-              <Barrage :data='barrageData'
-                :isStopBarrage="isStopBarrage"
-                class='barrage-content'>
-                <li></li>
-              </Barrage>
+                    <Barrage :data='barrageData'
+                      :isStopBarrage="isStopBarrage"
+                      class='barrage-content'>
+                      <li></li>
+                    </Barrage>
+                    <div class="stop" @click="stopBarrage">{{isStopBarrage?'开始弹幕':'暂停弹幕'}}</div>
 
                     <script>
                       export default {
@@ -98,35 +104,35 @@ export default {
               explain: `弹幕内容`,
               type: `Array`,
               default: `-`,
-              choose: `-`
+              required: `true`
             },
             {
               propName: `isStopBarrage`,
               explain: `是否暂停弹幕，为true后，会走完当前已经添加的弹幕，不再增加弹幕`,
               type: `Boolean`,
               default: `false`,
-              choose: `true/false`
+              required: `false`
             },
             {
               propName: `MAX`,
               explain: `位置上一共有多少条的位置`,
               type: `Number`,
               default: `3`,
-              choose: `-`
+              required: `true`
             },
             {
               propName: `intervalTime`,
               explain: `每一条弹幕插入的间隔时间，与前一条的宽度正相关`,
               type: `Number`,
               default: `50`,
-              choose: `-`
+              required: `false`
             },
             {
               propName: `speed`,
               explain: `每一条弹幕的移动速度，越大越快`,
               type: `Number`,
               default: `200`,
-              choose: `-`
+              required: `false`
             }
           ]
         }

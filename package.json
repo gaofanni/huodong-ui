@@ -1,9 +1,8 @@
 {
-  "name": "vue-multi",
+  "name": "huodong-ui",
   "version": "1.0.0",
-  "description": "multipage base on vue.js",
-  "author": "fupengcheng <fupengcheng@4399inc.com>",
-  "private": true,
+  "description": "huodong-ui",
+  "private": false,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
