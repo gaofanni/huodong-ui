@@ -3,7 +3,7 @@
     <Example :info="exampleInfo.info"
       :code="exampleInfo.code"
       :tableInfo='exampleInfo.tableInfo'>
-      <Lotto :get="lottoResult"
+      <Lotto :lottoResult="lottoResult"
         :rewardLen="rewardList.length"
         :num='scrollNum'
         :isGameBegin='gameBegin'
@@ -29,189 +29,188 @@
 </template>
 
 <script>
-import Lotto from "../../packages/lotto/index";
-import Example from "../../components/example/index";
-export default {
-  data() {
-    return {
-      exampleInfo: {
-        info: {
-          title: "抽奖大乐透",
-          author: "gaofanni",
-          tip:
-            "初始状态滚动展示抽奖结果，点击抽奖由组件外部传入抽奖结果，组件内部进行处理展示，抽奖结束后，继续滚动展示"
-        },
-        code: `
-                <Lotto :get="lottoResult"
-                    :rewardLen="rewardList.length"
-                    :num='scrollNum'
-                    :isGameBegin='gameBegin'
-                    @checkGamePermission="checkGamePermission"
-                    @lottoOver="lottoOver">
-                    <div class="box"
-                        :slot="\`box\${index+1}\`"
-                        v-for="(ele,index) in scrollNum">
-                        <div class="content">
-                            <ul>
-                                <li ref="scrollEl1"
-                                    class="goods"
-                                    v-for="(item,index) in rewardList"
-                                    :class="\`gift-\${item.key}-s\`"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div slot='btn-begin'
-                        class='btn btn-begin'></div>
-                </Lotto>
+  import Lotto from "../../packages/lotto/index";
+  import Example from "../../components/example/index";
+  export default {
+    data() {
+      return {
+        exampleInfo: {
+          info: {
+            title: "抽奖大乐透",
+            author: "gaofanni",
+            tip: "初始状态滚动展示抽奖结果，点击抽奖由组件外部传入抽奖结果，组件内部进行处理展示，抽奖结束后，继续滚动展示"
+          },
+          code: `
+                      <Lotto :get="lottoResult"
+                          :rewardLen="rewardList.length"
+                          :num='scrollNum'
+                          :isGameBegin='gameBegin'
+                          @checkGamePermission="checkGamePermission"
+                          @lottoOver="lottoOver">
+                          <div class="box"
+                              :slot="\`box\${index+1}\`"
+                              v-for="(ele,index) in scrollNum">
+                              <div class="content">
+                                  <ul>
+                                      <li ref="scrollEl1"
+                                          class="goods"
+                                          v-for="(item,index) in rewardList"
+                                          :class="\`gift-\${item.key}-s\`"></li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div slot='btn-begin'
+                              class='btn btn-begin'></div>
+                      </Lotto>
 
-                <script>
-                    export default {
-                        data() {
-                        return {
-                            lottoResult: {},
-                            rewardList: [
-                            {
-                                key: "sizhongfen"
-                            },
-                            {
-                                key: "cake"
-                            },
-                            {
-                                key: "shengrikuaile"
-                            },
-                            {
-                                key: "laosiji"
-                            },
-                            {
-                                key: "shoujizhijia"
-                            },
-                            {
-                                key: "baozhen"
-                            },
-                            {
-                                key: "bangbangtang"
-                            },
-                            {
-                                key: "gouliang"
-                            }
-                            ],
-                            gameBegin: false,
-                            scrollNum: 3
-                        };
-                        },
-                        methods: {
-                            checkGamePermission() {
-                                this.gameBegin = true;
-                            },
-                            lottoOver() {
-                                if (this.lottoResult.index) {
-                                    alert("中奖啦");
-                                    this.lottoResult = {}; //模拟没中奖
-                                } else {
-                                    alert("没中奖");
-                                    this.lottoResult = {index: 1};//模拟中奖
-                                }
-                                this.gameBegin = false;
-                            }
-                        },
-                        components: { Lotto }
-                    }
-                <\/script>`,
-        tableInfo: {
-          attributes: [
-            {
-              propName: "lottoResult",
-              explain: `中奖信息，中奖:{index:中奖的索引},没中奖:{}`,
-              type: `Object`,
-              default: `{}`,
-              required: "true"
-            },
-            {
-              propName: "rewardLen",
-              explain: `轮播图选项个数`,
-              type: `Number`,
-              default: `{}`,
-              required: "required"
-            },
-            {
-              propName: "isGameBegin",
-              explain: `是否可以开始抽奖，用于点击开始按钮的确认`,
-              type: `Boolean`,
-              default: `-`,
-              required: "true"
-            },
-            {
-              propName: "num",
-              explain: `抽奖单元个数`,
-              type: `Number`,
-              default: `3`,
-              required: "false"
-            }
-          ],
-          events: [
-            {
-              eventsName: "checkGamePermission",
-              explain: "点击'点我转一转'按钮触发的事件",
-              default: "--"
-            },
-            {
-              eventsName: "lottoOver",
-              explain: "抽奖动画结束时触发的事件",
-              default: "--"
-            }
-          ]
-        }
-      },
-      lottoResult: {},
-      rewardList: [
-        {
-          key: "sizhongfen"
+                      <script>
+                          export default {
+                              data() {
+                              return {
+                                  lottoResult: {},
+                                  rewardList: [
+                                  {
+                                      key: "sizhongfen"
+                                  },
+                                  {
+                                      key: "cake"
+                                  },
+                                  {
+                                      key: "shengrikuaile"
+                                  },
+                                  {
+                                      key: "laosiji"
+                                  },
+                                  {
+                                      key: "shoujizhijia"
+                                  },
+                                  {
+                                      key: "baozhen"
+                                  },
+                                  {
+                                      key: "bangbangtang"
+                                  },
+                                  {
+                                      key: "gouliang"
+                                  }
+                                  ],
+                                  gameBegin: false,
+                                  scrollNum: 3
+                              };
+                              },
+                              methods: {
+                                  checkGamePermission() {
+                                      this.gameBegin = true;
+                                  },
+                                  lottoOver() {
+                                      if (this.lottoResult.index) {
+                                          alert("中奖啦");
+                                          this.lottoResult = {}; //模拟没中奖
+                                      } else {
+                                          alert("没中奖");
+                                          this.lottoResult = {index: 1};//模拟中奖
+                                      }
+                                      this.gameBegin = false;
+                                  }
+                              },
+                              components: { Lotto }
+                          }
+                      <\/script>`,
+          tableInfo: {
+            attributes: [
+              {
+                propName: "lottoResult",
+                explain: `中奖信息，中奖:{index:中奖的索引},没中奖:{}`,
+                type: `Object`,
+                default: `-`,
+                required: "true"
+              },
+              {
+                propName: "rewardLen",
+                explain: `轮播图选项个数`,
+                type: `Number`,
+                default: `-`,
+                required: "true"
+              },
+              {
+                propName: "isGameBegin",
+                explain: `是否可以开始抽奖，用于点击开始按钮的确认`,
+                type: `Boolean`,
+                default: `-`,
+                required: "true"
+              },
+              {
+                propName: "num",
+                explain: `抽奖单元个数`,
+                type: `Number`,
+                default: `3`,
+                required: "false"
+              }
+            ],
+            events: [
+              {
+                eventsName: "checkGamePermission",
+                explain: "点击'点我转一转'按钮触发的事件",
+                default: "--"
+              },
+              {
+                eventsName: "lottoOver",
+                explain: "抽奖动画结束时触发的事件",
+                default: "--"
+              }
+            ]
+          }
         },
-        {
-          key: "cake"
-        },
-        {
-          key: "shengrikuaile"
-        },
-        {
-          key: "laosiji"
-        },
-        {
-          key: "shoujizhijia"
-        },
-        {
-          key: "baozhen"
-        },
-        {
-          key: "bangbangtang"
-        },
-        {
-          key: "gouliang"
-        }
-      ],
-      gameBegin: false,
-      scrollNum: 3
-    };
-  },
-  methods: {
-    checkGamePermission() {
-      this.gameBegin = true;
+        lottoResult: {},
+        rewardList: [
+          {
+            key: "sizhongfen"
+          },
+          {
+            key: "cake"
+          },
+          {
+            key: "shengrikuaile"
+          },
+          {
+            key: "laosiji"
+          },
+          {
+            key: "shoujizhijia"
+          },
+          {
+            key: "baozhen"
+          },
+          {
+            key: "bangbangtang"
+          },
+          {
+            key: "gouliang"
+          }
+        ],
+        gameBegin: false,
+        scrollNum: 3
+      };
     },
-    lottoOver() {
-      if (this.lottoResult.index) {
-        alert("中奖啦");
-        this.lottoResult = {}; //模拟没中奖
-      } else {
-        alert("没中奖");
-        this.lottoResult = {
-          index: 1
-        };
+    methods: {
+      checkGamePermission() {
+        this.gameBegin = true;
+      },
+      lottoOver() {
+        if (this.lottoResult.index) {
+          alert("中奖啦");
+          this.lottoResult = {}; //模拟没中奖
+        } else {
+          alert("没中奖");
+          this.lottoResult = {
+            index: 1
+          };
+        }
+        this.gameBegin = false;
       }
-      this.gameBegin = false;
-    }
-  },
-  components: { Lotto, Example }
-};
+    },
+    components: { Lotto, Example }
+  };
 </script>
 
 <style lang="scss" scoped>

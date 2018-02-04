@@ -9,11 +9,6 @@
 <script>
   export default {
     name: "scrollNotice",
-    data() {
-      return {};
-    },
-    computed: {},
-    created() {},
     mounted() {
       this.moving();
     },
