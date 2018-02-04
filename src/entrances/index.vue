@@ -7,14 +7,9 @@
     <section class="main">
       <aside style="display:block"
         :class="{show:isShowAside,hide:!isShowAside}">
-        <router-link :to="{name:'radar'}">radar 雷达图</router-link>
-        <router-link :to="{name:'lotto'}">lotto 抽奖乐透</router-link>
-        <router-link :to="{name:'scrollNotice'}">scrollNotice 跑马灯</router-link>
-        <router-link :to="{name:'barrage'}">barrage 弹幕</router-link>
-        <router-link :to="{name:'gameboxShare'}">gameboxShare 游戏盒分享</router-link>
-        <router-link :to="{name:'guessPic'}">guessPic 猜图</router-link>
-        <router-link :to="{name:'backTop'}">backTop 回到顶部</router-link>
-        <router-link :to="{name:'uploadImg'}">uploadImg 上传图片</router-link>
+        <router-link :to="{name:route.name}"
+          v-for="(route,index) in routerArr"
+          :key="index">{{route.name}}</router-link>
       </aside>
       <section class='container'>
         <div class="inner">
@@ -26,18 +21,31 @@
 </template>
 
 <script>
-export default {
-  name: "root",
-  data() {
-    return {
-      isShowAside: false
-    };
-  },
-  mounted() {},
-  computed: {},
-  methods: {},
-  components: {}
-};
+  export default {
+    name: "root",
+    data() {
+      return {
+        isShowAside: false,
+        routerArr: []
+      };
+    },
+    mounted() {
+      this.getRouteArr();
+    },
+    computed: {},
+    methods: {
+      getRouteArr() {
+        let routers = require.context("../examples/", true, /\.vue$/);
+        routers.keys().map(r => {
+          let key = /\.\/([\s\S]*)\/[\s\S]*.vue/.exec(r)[1];
+          this.routerArr.push({
+            name: key
+          });
+        });
+      }
+    },
+    components: {}
+  };
 </script>
 
 <style lang="scss">
