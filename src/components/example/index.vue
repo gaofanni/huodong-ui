@@ -1,11 +1,14 @@
 <template>
   <div class="wrap">
+    <!-- 说明 -->
     <div class="info">
       <div class='title'>{{info.title}}</div>
       <div class="author">{{info.author}}</div>
       <div class="tip">{{info.tip}}</div>
     </div>
+    <!-- 插入组件区域 -->
     <slot></slot>
+    <!-- 代码显示 -->
     <div class="btn-showCode"
       @click="isShowCode=!isShowCode">{{isShowCode?`隐藏代码`:`显示代码`}}</div>
     <div class="code-wrap"
@@ -18,6 +21,11 @@
         v-html="html">
             </pre>
     </div>
+    <div class="download"
+      v-if="download">
+      <p v-html="download"></p>
+    </div>
+    <!-- 参数配置表 -->
     <table class="attributes"
       v-if="tableInfo.attributes">
       <caption class="title">Attributes</caption>
@@ -94,20 +102,27 @@ export default {
   name: "example",
   props: {
     info: {
-      default: {}
+      default() {
+        return {};
+      },
+      required: true,
+      type: Object
     },
     code: {
-      default() {
-        return "";
-      }
+      required: true,
+      type: String
     },
     tips: {
-      default: ""
+      default: "",
+      required: false,
+      type: String
     },
     tableInfo: {
       default() {
         return {};
-      }
+      },
+      required: false,
+      type: Object
     }
   },
   filters: {
@@ -121,11 +136,22 @@ export default {
   },
   data() {
     return {
-      isShowCode: false
+      isShowCode: false,
+      download: "",
+      defaultDownload:
+        "npm set registry http://192.168.62.203:4873<br>npm i huodongUI -S"
     };
   },
-  methods: {},
-  components: {}
+  mounted() {
+    this.getDownloadTxt();
+  },
+  methods: {
+    getDownloadTxt() {
+      this.download = `${this.defaultDownload}<br>import { ${
+        this.$route.name
+      } } from "huodongUI"`;
+    }
+  }
 };
 </script>
 
@@ -217,11 +243,25 @@ export default {
       color: #999;
     }
   }
+  //下载模块样式
+  .download {
+    padding: 8px 16px;
+    background-color: #ecf8ff;
+    border-radius: 4px;
+    border-left: 5px solid #50bfff;
+    margin: 20px 0;
+    p {
+      font-size: re(12);
+      color: #3182bd;
+      line-height: 2;
+    }
+  }
   //表格样式
   table {
     margin-top: re(20);
-    font-size: re(14);
+    font-size: re(12);
     width: 100%;
+    line-height: 1.5;
     .title {
       text-align: left;
       font-size: re(20);
@@ -236,7 +276,7 @@ export default {
       color: #333;
       border-bottom: 1px solid #d8d8d8;
       padding: re(8);
-      max-width: re(250);
+      max-width: re(260);
       text-align: left;
     }
   }

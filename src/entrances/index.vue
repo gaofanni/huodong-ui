@@ -2,8 +2,7 @@
   <div class="root">
     <header>
       <span class="nav"
-        @click="isShowAside=!isShowAside"></span>
-      huodong-ui
+        @click="isShowAside=!isShowAside"></span> huodongUI
     </header>
     <section class="main">
       <aside style="display:block"
@@ -22,31 +21,31 @@
 </template>
 
 <script>
-  export default {
-    name: "root",
-    data() {
-      return {
-        isShowAside: false,
-        routerArr: []
-      };
-    },
-    mounted() {
-      this.getRouteArr();
-    },
-    computed: {},
-    methods: {
-      getRouteArr() {
-        let routers = require.context("../examples/", true, /\.vue$/);
-        routers.keys().map(r => {
-          let key = /\.\/([\s\S]*)\/[\s\S]*.vue/.exec(r)[1];
-          this.routerArr.push({
-            name: key
-          });
+export default {
+  name: "root",
+  data() {
+    return {
+      isShowAside: false,
+      routerArr: []
+    };
+  },
+  mounted() {
+    this.getRouteArr();
+  },
+  computed: {},
+  methods: {
+    getRouteArr() {
+      let routers = require.context("../examples/", true, /\.vue$/);
+      routers.keys().map(r => {
+        let key = /\.\/([\s\S]*)\/[\s\S]*.vue/.exec(r)[1];
+        this.routerArr.push({
+          name: key
         });
-      }
-    },
-    components: {}
-  };
+      });
+    }
+  },
+  components: {}
+};
 </script>
 
 <style lang="scss">

@@ -1,6 +1,7 @@
 <template>
     <div class="wrap">
         <Example :info="exampleInfo.info"
+            :download="exampleInfo.download"
             :code="exampleInfo.code"
             :tips="exampleInfo.tips"
             :tableInfo="exampleInfo.tableInfo">
