@@ -29,3 +29,5 @@ npm run build
             -packages#组件源码，发布的地方，发布的组件引用名与内部文件夹名字一致
             -router#定义路由
 ```
+### 注意事项
+* packages内要发布的组件，如果需要引用其他外部模块，请保证引用的模块在packages目录下，如果是npm下载的模块，请在package目录下的package.json内声明
