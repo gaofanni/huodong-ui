@@ -28,7 +28,7 @@ import Example from "../../components/example/index";
 export default {
   data() {
     return {
-      torrowTime: new Date().getTime(),
+      torrowTime: new Date().getTime() + 86400000,
       exampleInfo: {
         info: {
           title: "倒计时",
@@ -77,6 +77,13 @@ export default {
               eventsName: "timeUp",
               explain: "倒计时变为0时触发",
               arguments: "current：当前时刻"
+            }
+          ],
+          methods: [
+            {
+              name: "halt",
+              explain: "切换倒计时的开始/暂停状态",
+              param: "-"
             }
           ]
         }
