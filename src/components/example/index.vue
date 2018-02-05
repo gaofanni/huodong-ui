@@ -30,11 +30,11 @@
       </thead>
       <tbody>
         <tr v-for="body in tableInfo.attributes">
-          <td>{{body.propName}}</td>
-          <td>{{body.explain}}</td>
-          <td>{{body.type}}</td>
-          <td>{{body.default}}</td>
-          <td>{{body.required}}</td>
+          <td>{{body.propName|empty}}</td>
+          <td>{{body.explain|empty}}</td>
+          <td>{{body.type|empty}}</td>
+          <td>{{body.default|empty}}</td>
+          <td>{{body.required|empty}}</td>
         </tr>
       </tbody>
     </table>
@@ -48,9 +48,9 @@
       </thead>
       <tbody>
         <tr v-for="event in tableInfo.events">
-          <td>{{event.eventsName}}</td>
-          <td>{{event.explain}}</td>
-          <td>{{event.arguments}}</td>
+          <td>{{event.eventsName|empty}}</td>
+          <td>{{event.explain|empty}}</td>
+          <td>{{event.arguments|empty}}</td>
         </tr>
       </tbody>
     </table>
@@ -60,11 +60,13 @@
       <thead>
         <th>插槽名</th>
         <th>说明</th>
+        <th>scope</th>
       </thead>
       <tbody>
         <tr v-for="event in tableInfo.slot">
-          <td>{{event.slotName}}</td>
-          <td>{{event.explain}}</td>
+          <td>{{event.slotName|empty}}</td>
+          <td>{{event.explain|empty}}</td>
+          <td>{{event.scope|empty}}</td>
         </tr>
       </tbody>
     </table>
@@ -78,9 +80,9 @@
       </thead>
       <tbody>
         <tr v-for="event in tableInfo.methods">
-          <td>{{event.name}}</td>
-          <td>{{event.explain}}</td>
-          <td>{{event.param}}</td>
+          <td>{{event.name|empty}}</td>
+          <td>{{event.explain|empty}}</td>
+          <td>{{event.param|empty}}</td>
         </tr>
       </tbody>
     </table>
@@ -105,6 +107,15 @@ export default {
     tableInfo: {
       default() {
         return {};
+      }
+    }
+  },
+  filters: {
+    empty: function(val) {
+      if (val) {
+        return val;
+      } else {
+        return "-";
       }
     }
   },

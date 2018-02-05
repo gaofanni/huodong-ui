@@ -1,6 +1,7 @@
 <template>
   <div class="wrap">
     <Example :info="exampleInfo.info"
+      :tableInfo="exampleInfo.tableInfo"
       :code="exampleInfo.code">
       <ScrollNotice class="scroll-notice">
         <li v-for="(item,index) in carousel"
@@ -22,6 +23,14 @@ export default {
     return {
       exampleInfo: {
         info: { title: "跑马灯", author: "gaofanni" },
+        tableInfo: {
+          slot: [
+            {
+              slotName: "默认插槽",
+              explain: "插入需滚动展示的节点"
+            }
+          ]
+        },
         code: `
             <ScrollNotice class="scroll-notice">
                 <li v-for="(item,index) in carousel" :key="index">
@@ -48,32 +57,26 @@ export default {
 
             <style>
               .scroll-notice {
-                  position: relative;
-                  display: inline-block;
-                  color: white;
-                  box-sizing: border-box;
+                position: relative;
+                display: inline-block;
+                color: white;
+                box-sizing: border-box;
+                overflow: hidden;
+                @include whr(509,49);
+                border-radius: re(10);
+                background: #ea8b51;
+                li {
                   overflow: hidden;
-                  @include whr(509,49);
-                  border-radius: re(10);
-                  background: #ea8b51;
-                  ul {
-                    display: inline-block;
-                    text-align: center;
-                    font-size: re(22);
-                    width: 100%;
-                    transform: translateZ(0);
-                    color: #68370e;
-                    li {
-                      overflow: hidden;
-                      text-overflow: ellipsis;
-                      white-space: nowrap;
-                      line-height: re(49);
-                    }
-                  }
-                  .hightlight {
-                    color: #ffe135;
-                  }
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  line-height: re(49);
+                  font-size: re(22);
+                  color: white;
                 }
+                .hightlight {
+                  color: #ffe135;
+                }
+              }
             </style>
             `
       },
@@ -101,19 +104,13 @@ export default {
     @include whr(509,49);
     border-radius: re(10);
     background: #ea8b51;
-    ul {
-      display: inline-block;
-      text-align: center;
+    li {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: re(49);
       font-size: re(22);
-      width: 100%;
-      transform: translateZ(0);
-      color: #68370e;
-      li {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        line-height: re(49);
-      }
+      color: white;
     }
     .hightlight {
       color: #ffe135;
