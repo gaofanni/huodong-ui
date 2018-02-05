@@ -68,6 +68,22 @@
         </tr>
       </tbody>
     </table>
+    <table class='methods'
+      v-if="tableInfo.methods">
+      <caption class="title">Methods</caption>
+      <thead>
+        <th>方法名</th>
+        <th>说明</th>
+        <th>参数</th>
+      </thead>
+      <tbody>
+        <tr v-for="event in tableInfo.methods">
+          <td>{{event.name}}</td>
+          <td>{{event.explain}}</td>
+          <td>{{event.param}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
