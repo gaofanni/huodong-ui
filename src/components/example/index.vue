@@ -169,12 +169,14 @@ export default {
   }
   //模块样式
   .wrap {
-    width: re(640);
-    // box-shadow: 0 0 re(10) rgba(100, 100, 100, 0.2);
+    width: re(720);
     margin: 0 auto;
     background: white;
     padding: re(20) 0;
     font-size: re(16);
+    @media screen and (max-width: 1280px) {
+      width: re(640);
+    }
   }
   .btn-showCode {
     width: 100%;
