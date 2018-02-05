@@ -108,6 +108,13 @@ export default {
               slotName: "background",
               explain: "上传图片的按钮插槽"
             }
+          ],
+          methods: [
+            {
+              name: "click",
+              explain: "使上传图片按钮获得焦点",
+              param: "-"
+            }
           ]
         }
       }
