@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=UTF-8>
+    <meta name="format-detection" content="telephone=no">
+    <title>
+        huodong-ui
+    </title>
+    
+    <script type="text/javascript">
+        /*rem初始化*/ ! function (a) {
+            function b() {
+                if (a.navigator.appVersion.match(/window|ipad|Mac/gi)) {
+                    m = f.getBoundingClientRect().width > 960 ? 720 : f.getBoundingClientRect().width;
+                } else {
+                    m = f.getBoundingClientRect().width;
+                }
+                a.rem = m / 16;
+                f.style.fontSize = a.rem + "px";
+            }
+
+            var c, d = a.navigator.appVersion.match(/iphone/gi) ? a.devicePixelRatio : 1,
+                e = 1 / d,
+                f = document.documentElement,
+                g = document.createElement("meta");
+            if (a.dpr = d, a.addEventListener("resize", function () {
+                clearTimeout(c), c = setTimeout(b, 300)
+            }, !1), a.addEventListener("pageshow", function (a) {
+                a.persisted && (clearTimeout(c), c = setTimeout(b, 300))
+            }, !1), f.setAttribute("data-dpr", d), g.setAttribute("name", "viewport"), g.setAttribute("content", "initial-scale=" + e + ", maximum-scale=" + e + ", minimum-scale=" + e + ", user-scalable=no"), f.firstElementChild) f.firstElementChild.appendChild(g);
+            else {
+                var h = document.createElement("div");
+                h.appendChild(g), document.write(h.innerHTML)
+            }
+            b()
+        }(window);
+    </script>
+<link href="../static/scss/index.css?v=1" rel="stylesheet"></head>
+
+<body>
+    <div id=app>
+    </div>
+<script type="text/javascript" src="../static/js/manifest.js?v=1"></script><script type="text/javascript" src="../static/js/vendor.js?v=1"></script><script type="text/javascript" src="../static/js/index.js?v=1"></script></body>
+
+</html>
+
+<script>
+</script>
+
+<script src="https://cdn.bootcss.com/eruda/1.4.1/eruda.js"></script>
+<script>eruda.init()</script>

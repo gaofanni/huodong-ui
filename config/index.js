@@ -2,7 +2,7 @@
 var path = require('path')
 var glob = require('glob')
 var version = 1;
-var title = '4399明星主播联赛，带你一起飞'; //请配置活动的标题
+var title = 'huodongUI'; //请配置活动的标题
 
 function getEntry(globPath) {
     var entries = {},
@@ -38,7 +38,7 @@ module.exports = {
     build: {
         env: require('./prod.env'),
         index: path.resolve(__dirname, '../../release/index.html'),
-        assetsRoot: path.resolve(__dirname, '../../release'),
+        assetsRoot: path.resolve(__dirname, '../release'),
         assetsSubDirectory: './static',
         assetsPublicPath: '../',
         productionSourceMap: false,
